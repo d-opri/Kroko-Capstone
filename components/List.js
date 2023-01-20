@@ -2,12 +2,12 @@ import styled from "styled-components";
 import React from "react";
 import listItems from "../db";
 
-export default function List({ children }) {
+export default function List() {
   return (
     <>
       <ListLayout>
-        {listItems.map((item, { id }) => (
-          <li key={id}>
+        {listItems.map((item) => (
+          <li key={item.id}>
             <ListItemLayout>
               <ListTitleText>{item.title}</ListTitleText>
 
