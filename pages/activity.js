@@ -1,5 +1,4 @@
 import React from "react";
-import listItems from "../db";
 import styled from "styled-components";
 import List from "../components/List";
 
