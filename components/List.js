@@ -27,15 +27,13 @@ const ListLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  margin: auto;
-  padding-top: 80px;
+  gap: 24px;
+  padding-top: 100px;
 `;
 
 const ListItemLayout = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
   width: 300px;
   height: 44px;
   background: #e1e1e1;
@@ -44,7 +42,6 @@ const ListItemLayout = styled.div`
 
 const ListTitleText = styled.h3`
   width: 100%;
-  height: 20px;
   font-size: 15px;
   text-align: center;
   color: #000000;
@@ -52,7 +49,6 @@ const ListTitleText = styled.h3`
 
 const AmountText = styled.p`
   width: 100%;
-  height: 20px;
   font-size: 13px;
   text-align: center;
 `;
