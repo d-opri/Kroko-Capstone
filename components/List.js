@@ -11,10 +11,8 @@ export default function List({ children }) {
             <ListItemLayout>
               <ListTitleText>{item.title}</ListTitleText>
 
-              <AmountText
-                style={{ color: item.amount.includes("+") ? "green" : "red" }}
-              >
-                {item.amount}
+              <AmountText style={{ color: item.amount > 0 ? "green" : "red" }}>
+                {item.amount} $
               </AmountText>
             </ListItemLayout>
           </li>
