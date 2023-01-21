@@ -33,27 +33,31 @@ const ListLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5em;
+  gap: 1em;
+  margin-left: 2em;
+  margin-right: 2em;
+  background: var(--clr-secondary);
+  border-radius: 0.8em;
 `;
 
 const ListItemLayout = styled.div`
   display: flex;
   flex-direction: row;
-  width: 300px;
+  width: 20em;
   height: 3em;
-  background: var(--clr-secondary);
-  border-radius: 0.5em;
 `;
 
 const ListTitleText = styled.h3`
-  width: 100%;
+  margin-right: auto;
+  padding-left: 1em;
   font-size: var(--fs-caption);
   text-align: center;
   color: var(--clr-primary);
 `;
 
 const AmountText = styled.p`
-  width: 100%;
+  margin-left: auto;
+  padding-right: 1em;
   font-size: var(--fs-links);
   text-align: center;
 `;
