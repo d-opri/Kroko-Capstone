@@ -10,7 +10,14 @@ export default function List(props) {
             <ListItemLayout>
               <ListTitleText>{item.title}</ListTitleText>
 
-              <AmountText style={{ color: item.amount > 0 ? "green" : "red" }}>
+              <AmountText
+                style={{
+                  color:
+                    item.amount > 0
+                      ? "var(--positive-balance)"
+                      : "var(--negative-balance)",
+                }}
+              >
                 {item.amount} $
               </AmountText>
             </ListItemLayout>
@@ -34,7 +41,7 @@ const ListItemLayout = styled.div`
   flex-direction: row;
   width: 300px;
   height: 2.57em;
-  background: #e1e1e1;
+  background: var(--clr-secondary);
   border-radius: 0.63em;
 `;
 
@@ -42,7 +49,7 @@ const ListTitleText = styled.h3`
   width: 100%;
   font-size: 15px;
   text-align: center;
-  color: #000000;
+  color: var(--clr-primary);
 `;
 
 const AmountText = styled.p`
