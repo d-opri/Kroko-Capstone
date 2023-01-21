@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import React from "react";
-import listItems from "../db";
 
-export default function List() {
+export default function List(props) {
   return (
     <>
       <ListLayout>
-        {listItems.map((item) => (
+        {props.items.map((item) => (
           <li key={item.id}>
             <ListItemLayout>
               <ListTitleText>{item.title}</ListTitleText>
@@ -27,17 +26,16 @@ const ListLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  padding-top: 100px;
+  gap: 1.5em;
 `;
 
 const ListItemLayout = styled.div`
   display: flex;
   flex-direction: row;
   width: 300px;
-  height: 44px;
+  height: 2.57em;
   background: #e1e1e1;
-  border-radius: 10px;
+  border-radius: 0.63em;
 `;
 
 const ListTitleText = styled.h3`
