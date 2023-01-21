@@ -40,20 +40,20 @@ const ListItemLayout = styled.div`
   display: flex;
   flex-direction: row;
   width: 300px;
-  height: 2.57em;
+  height: 3em;
   background: var(--clr-secondary);
-  border-radius: 0.63em;
+  border-radius: 0.5em;
 `;
 
 const ListTitleText = styled.h3`
   width: 100%;
-  font-size: 15px;
+  font-size: var(--fs-caption);
   text-align: center;
   color: var(--clr-primary);
 `;
 
 const AmountText = styled.p`
   width: 100%;
-  font-size: 13px;
+  font-size: var(--fs-links);
   text-align: center;
 `;

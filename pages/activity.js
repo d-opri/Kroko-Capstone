@@ -14,7 +14,7 @@ export default function Activity() {
 }
 
 const Title = styled.h1`
-  font-size: 1.5rem;
+  font-size: var(--fs-title);
   text-align: center;
-  padding: 20% 0 20% 0;
+  padding-block: 5rem;
 `;

@@ -4,8 +4,8 @@ export default createGlobalStyle`
   :root {
     --fs-title: 2rem;
     --fs-subtitle: 1.4rem;
-    --fs-caption: 1.2rem;
-    --fs-links: 1rem;
+    --fs-caption: 1rem;
+    --fs-links: 0.9rem;
 
     --clr-primary: rgba(52, 52, 52, 1);
     --clr-secondary: rgba(189, 188, 188, 1);
