@@ -4,9 +4,9 @@ import React from "react";
 export default function List(props) {
   return (
     <>
-      {props.items.map((item) => (
-        <li key={item.id}>
-          <ItemLayout>
+      <ListLayout>
+        {props.items.map((item) => (
+          <ItemLayout key={item.id}>
             <TitleText>{item.title}</TitleText>
 
             <AmountText
@@ -20,33 +20,29 @@ export default function List(props) {
               {item.amount} $
             </AmountText>
           </ItemLayout>
-        </li>
-      ))}
+        ))}
+      </ListLayout>
     </>
   );
 }
 
-const ListLayout = styled.div`
+const ListLayout = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1em;
   margin-left: 2em;
   margin-right: 2em;
 `;
 
-const ItemLayout = styled.div`
+const ItemLayout = styled.li`
   background: var(--clr-secondary);
   border-radius: 0.8em;
   display: flex;
   flex-direction: row;
-  margin-left: 3em;
-  margin-right: 3em;
   justify-content: space-between;
   padding-left: 2em;
   padding-right: 2em;
-  margin-bottom: 1em;
 `;
 
 const TitleText = styled.h3`
