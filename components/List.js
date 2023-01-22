@@ -4,26 +4,24 @@ import React from "react";
 export default function List(props) {
   return (
     <>
-      <ListLayout>
-        {props.items.map((item) => (
-          <li key={item.id}>
-            <ListItemLayout>
-              <ListTitleText>{item.title}</ListTitleText>
+      {props.items.map((item) => (
+        <li key={item.id}>
+          <ItemLayout>
+            <TitleText>{item.title}</TitleText>
 
-              <AmountText
-                style={{
-                  color:
-                    item.amount > 0
-                      ? "var(--positive-balance)"
-                      : "var(--negative-balance)",
-                }}
-              >
-                {item.amount} $
-              </AmountText>
-            </ListItemLayout>
-          </li>
-        ))}
-      </ListLayout>
+            <AmountText
+              style={{
+                color:
+                  item.amount > 0
+                    ? "var(--positive-balance)"
+                    : "var(--negative-balance)",
+              }}
+            >
+              {item.amount} $
+            </AmountText>
+          </ItemLayout>
+        </li>
+      ))}
     </>
   );
 }
@@ -36,28 +34,28 @@ const ListLayout = styled.div`
   gap: 1em;
   margin-left: 2em;
   margin-right: 2em;
+`;
+
+const ItemLayout = styled.div`
   background: var(--clr-secondary);
   border-radius: 0.8em;
-`;
-
-const ListItemLayout = styled.div`
   display: flex;
   flex-direction: row;
-  width: 20em;
-  height: 3em;
+  margin-left: 3em;
+  margin-right: 3em;
+  justify-content: space-between;
+  padding-left: 2em;
+  padding-right: 2em;
+  margin-bottom: 1em;
 `;
 
-const ListTitleText = styled.h3`
-  margin-right: auto;
-  padding-left: 1em;
+const TitleText = styled.h3`
   font-size: var(--fs-caption);
   text-align: center;
   color: var(--clr-primary);
 `;
 
 const AmountText = styled.p`
-  margin-left: auto;
-  padding-right: 1em;
   font-size: var(--fs-links);
   text-align: center;
 `;
