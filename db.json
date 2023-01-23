@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Currywurst",
+    "amount": -200,
+    "id": 1
+  },
+  {
+    "title": "Pizza",
+    "amount": 20,
+    "id": 2
+  },
+  {
+    "title": "Currywurst",
+    "amount": -200,
+    "id": 3
+  },
+  {
+    "title": "Pizza",
+    "amount": 20,
+    "id": 4
+  },
+  {
+    "title": "Currywurst",
+    "amount": -200,
+    "id": 5
+  },
+  {
+    "title": "Pizza",
+    "amount": 20,
+    "id": 6
+  },
+  {
+    "title": "Currywurst",
+    "amount": -200,
+    "id": 7
+  },
+  {
+    "title": "Pizza",
+    "amount": 20,
+    "id": 8
+  }
+]
