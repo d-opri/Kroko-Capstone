@@ -13,7 +13,7 @@ export default function Activity() {
   );
 }
 
-const Title = styled.h1`
+export const Title = styled.h1`
   font-size: var(--fs-title);
   text-align: center;
   padding-block: 5rem;

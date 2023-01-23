@@ -1,5 +1,6 @@
-import Activity from "@/pages/activity";
+import Activity from "@/pages/Activity";
+import Form from "./Form";
 
 export default function HomePage() {
-  return <Activity />;
+  return <Form />;
 }
