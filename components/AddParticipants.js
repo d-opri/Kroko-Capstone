@@ -43,14 +43,16 @@ function AddParticipants() {
       {list.map((item) => (
         <>
           <Layout>
-            <label htmlFor='participants'>{item.label}</label>
+            <label key={item.label} htmlFor='participants'>
+              {item.label}
+            </label>
             <input
               minLength={2}
               type='radio'
               value={item.label}
-              onChange={handleChange}
+              onChange={(e) => setIsPaid(e.target.value)}
               name='participants'
-              checked={item.value}
+              checked={isPaid === item.value}
             />
           </Layout>
         </>
