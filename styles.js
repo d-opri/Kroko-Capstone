@@ -20,6 +20,7 @@ export default createGlobalStyle`
   *::after {
     box-sizing: border-box;
     padding: 0;
+    
   }
 
   body {
