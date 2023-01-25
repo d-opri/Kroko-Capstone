@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import React from "react";
 
 export default function List(props) {
   return (
@@ -35,7 +34,7 @@ const ListLayout = styled.ul`
   margin-right: 2em;
 `;
 
-export const ItemLayout = styled.li`
+const ItemLayout = styled.li`
   background: var(--clr-secondary);
   border-radius: 0.8em;
   display: flex;
@@ -45,7 +44,7 @@ export const ItemLayout = styled.li`
   padding-right: 2em;
 `;
 
-export const TitleText = styled.h3`
+const TitleText = styled.h3`
   font-size: var(--fs-caption);
   text-align: center;
   color: var(--clr-primary);

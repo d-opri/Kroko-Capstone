@@ -1,9 +1,5 @@
-import Form from "../components/Form";
+import Form from "./CreateBill";
 
 export default function HomePage() {
-  return (
-    <>
-      <Form />
-    </>
-  );
+  return <Form />;
 }

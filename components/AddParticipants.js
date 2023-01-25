@@ -1,16 +1,13 @@
-import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 
 function AddParticipants() {
   const [list, setList] = useState([]);
-
   const [addName, setAddName] = useState("");
-
   const [isPaid, setIsPaid] = useState(false);
 
-  function handleAddList(e) {
-    e.preventDefault();
+  function handleAddList(event) {
+    event.preventDefault();
     setAddName("");
     setList([
       ...list,
@@ -21,56 +18,53 @@ function AddParticipants() {
     ]);
   }
 
-  function handleChange() {
-    setIsPaid(!isPaid);
-  }
-
   return (
-    <>
-      <label htmlFor='input'></label>
+    <Fieldset>
+      <legend>Participants</legend>
+      <label htmlFor='input'>Add Participants</label>
       <input
         value={addName}
         name='input'
-        onChange={(e) => setAddName(e.target.value)}
+        id='input'
+        onChange={(event) => setAddName(event.target.value)}
         type='text'
         placeholder='Add Name'
       />
-      <button onClick={handleAddList}>Add Participant</button>
-
+      <button type='button' onClick={handleAddList}>
+        Add Participant
+      </button>
       <Subtitle>Paid By</Subtitle>
-      <br />
-
       {list.map((item) => (
-        <>
-          <Layout>
-            <label key={item.label} htmlFor='participants'>
-              {item.label}
-            </label>
-            <input
-              minLength={2}
-              type='radio'
-              value={item.label}
-              onChange={(e) => setIsPaid(e.target.value)}
-              name='participants'
-              checked={isPaid === item.value}
-            />
-          </Layout>
-        </>
+        <List key={item.index}>
+          <label htmlFor='participants'>{item.label}</label>
+          <input
+            type='radio'
+            id={item.label}
+            value={item.label}
+            onChange={(event) => setIsPaid(event.target.value)}
+            name='participants'
+            checked={isPaid === item.value}
+          />
+        </List>
       ))}
-    </>
+    </Fieldset>
   );
 }
 
-const Subtitle = styled.h2`
+const Subtitle = styled.h3`
   text-align: right;
-  font-size: var(--fs-caption);
+  font-weight: 500;
 `;
 
-const Layout = styled.ul`
-  list-style: none;
+const List = styled.li`
   display: flex;
-  flex-direction: row;
   justify-content: right;
+  gap: 1em;
+`;
+
+const Fieldset = styled.fieldset`
+  justify-content: right;
+  display: grid;
   gap: 1em;
 `;
 
