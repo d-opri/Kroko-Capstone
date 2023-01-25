@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
 import AddParticipants from "../components/AddParticipants";
@@ -15,7 +14,7 @@ function Form() {
   return (
     <>
       <Title>Create New Bill</Title>
-      <StyledLink href='/Activity'>X</StyledLink>
+
       <Container onSubmit={handleSubmit}>
         <label htmlFor='title'>Title</label>
         <input
@@ -40,15 +39,6 @@ function Form() {
     </>
   );
 }
-
-const StyledLink = styled(Link)`
-  color: black;
-  font-size: large;
-  display: flex;
-  justify-content: end;
-  margin: 2em;
-  font-weight: 900;
-`;
 
 const Title = styled.h1`
   font-size: var(--fs-title);
