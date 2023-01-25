@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import AddParticipants from "./AddParticipants";
 
 function Form() {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
-  const [paid, setPaid] = useState(false);
 
   return (
     <>
@@ -28,8 +28,7 @@ function Form() {
           placeholder='00.00'
           required
         />
-
-        <button>Calculate</button>
+        <AddParticipants />
       </Container>
     </>
   );

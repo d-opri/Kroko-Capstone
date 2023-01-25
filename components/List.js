@@ -35,7 +35,7 @@ const ListLayout = styled.ul`
   margin-right: 2em;
 `;
 
-const ItemLayout = styled.li`
+export const ItemLayout = styled.li`
   background: var(--clr-secondary);
   border-radius: 0.8em;
   display: flex;
@@ -45,7 +45,7 @@ const ItemLayout = styled.li`
   padding-right: 2em;
 `;
 
-const TitleText = styled.h3`
+export const TitleText = styled.h3`
   font-size: var(--fs-caption);
   text-align: center;
   color: var(--clr-primary);
