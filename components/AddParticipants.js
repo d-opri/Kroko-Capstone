@@ -40,22 +40,25 @@ function AddParticipants() {
         Add Participant
       </button>
       <Subtitle>Paid By</Subtitle>
-      {list.map((item) => (
-        <List key={item.index}>
-          <label htmlFor='participants'>{item.label}</label>
-          <input
-            type='radio'
-            id={item.id}
-            value={item.label}
-            onChange={(event) => setIsPaid(event.target.value)}
-            name='participants'
-            checked={isPaid === item.value}
-          />
-          <button type='button' onClick={() => handleDeleteItem(item.id)}>
-            X
-          </button>
-        </List>
-      ))}
+      {list
+        .slice()
+        .reverse()
+        .map((item) => (
+          <List key={item.index}>
+            <label htmlFor='participants'>{item.label}</label>
+            <input
+              type='radio'
+              id={item.id}
+              value={item.label}
+              onChange={(event) => setIsPaid(event.target.value)}
+              name='participants'
+              checked={isPaid === item.value}
+            />
+            <button type='button' onClick={() => handleDeleteItem(item.id)}>
+              X
+            </button>
+          </List>
+        ))}
     </Fieldset>
   );
 }
