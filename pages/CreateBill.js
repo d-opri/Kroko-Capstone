@@ -3,13 +3,18 @@ import styled from "styled-components";
 import Link from "next/link";
 import AddParticipants from "../components/AddParticipants";
 
-function Form() {
+function calculateBillSplit({ onSubmit }) {
+  alert("Coming soon..");
+}
+
+export default function Form() {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
-    alert("Calculating Split Next");
+
+    calculateBillSplit(Form);
   }
 
   return (
@@ -66,5 +71,3 @@ const Container = styled.form`
   margin-left: 2em;
   margin-right: 2em;
 `;
-
-export default Form;
