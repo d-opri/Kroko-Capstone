@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Link from "next/link";
 import AddParticipants from "../components/AddParticipants";
 
 function Form() {
@@ -13,6 +14,7 @@ function Form() {
 
   return (
     <>
+      <StyledLink href='/'>X</StyledLink>
       <Title>Create New Bill</Title>
 
       <Container onSubmit={handleSubmit}>
@@ -39,6 +41,15 @@ function Form() {
     </>
   );
 }
+
+const StyledLink = styled(Link)`
+  color: black;
+  font-size: large;
+  display: flex;
+  justify-content: end;
+  margin: 2em;
+  font-weight: 900;
+`;
 
 const Title = styled.h1`
   font-size: var(--fs-title);
