@@ -1,12 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
+import uuid from "react-uuid";
 
 function AddParticipants() {
   const [list, setList] = useState([]);
   const [addName, setAddName] = useState("");
   const [isPaid, setIsPaid] = useState(false);
 
-  function handleAddList(event) {
+  function handleAddItem(event) {
     event.preventDefault();
     setAddName("");
     setList([
@@ -14,8 +15,13 @@ function AddParticipants() {
       {
         label: addName,
         value: isPaid,
+        id: uuid(),
       },
     ]);
+  }
+  function handleDeleteItem(id) {
+    const newList = list.filter((item) => item.id !== id);
+    setList(newList);
   }
 
   return (
@@ -30,7 +36,7 @@ function AddParticipants() {
         type='text'
         placeholder='Add Name'
       />
-      <button type='button' onClick={handleAddList}>
+      <button type='button' onClick={handleAddItem}>
         Add Participant
       </button>
       <Subtitle>Paid By</Subtitle>
@@ -39,12 +45,15 @@ function AddParticipants() {
           <label htmlFor='participants'>{item.label}</label>
           <input
             type='radio'
-            id={item.label}
+            id={item.id}
             value={item.label}
             onChange={(event) => setIsPaid(event.target.value)}
             name='participants'
             checked={isPaid === item.value}
           />
+          <button type='button' onClick={() => handleDeleteItem(item.id)}>
+            X
+          </button>
         </List>
       ))}
     </Fieldset>
