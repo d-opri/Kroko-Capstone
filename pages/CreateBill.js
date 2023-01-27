@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import AddParticipants from "../components/AddParticipants";
+import Button from "@/components/Button";
 
-export default function Form() {
+export default function Form({ toCalculate }) {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
+  const [participants, setParticipants] = useState([]);
 
   const validateInput = ({ title, amount }) => {
     if (!title.trim()) {
@@ -28,6 +30,7 @@ export default function Form() {
     if (!validation) {
       return null;
     }
+    toCalculate({ participants, amount, paidBy });
   }
 
   return (
@@ -63,9 +66,9 @@ export default function Form() {
           id='amount'
         />
         <AddParticipants />
-        <button type='submit' onClick={handleSubmit}>
-          Submit
-        </button>
+        <Button type='submit' onClick={handleSubmit}>
+          Calculate
+        </Button>
       </Container>
     </>
   );
