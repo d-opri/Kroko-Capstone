@@ -63,13 +63,15 @@ function AddParticipants() {
         .reverse()
         .map((item) => (
           <List key={item.index}>
-            <label htmlFor='participants'>{item.label}</label>
+            <label aria-label='participant' htmlFor='participant'>
+              {item.label}
+            </label>
             <input
               type='radio'
               id={item.id}
               value={item.label}
               onChange={(event) => setIsPaid(event.target.value)}
-              name='participants'
+              name='participant'
               checked={isPaid === item.value}
             />
             <button type='button' onClick={() => handleDeleteItem(item.id)}>
