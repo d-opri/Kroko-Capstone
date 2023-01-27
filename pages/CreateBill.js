@@ -11,8 +11,8 @@ export default function Form() {
     if (!title.trim()) {
       return window.alert("Enter a Title");
     }
-    if (title.length > 30) {
-      return window.alert("Maximum of 30 characters");
+    if (title.length > 50) {
+      return window.alert("Maximum of 50 characters");
     }
     if (!amount.trim()) {
       return window.alert("Enter an Amount");
