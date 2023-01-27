@@ -7,11 +7,27 @@ export default function Form() {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
 
+  const validateInput = ({ title, amount }) => {
+    if (!title.trim()) {
+      return window.alert("Enter a Title");
+    }
+    if (title.length > 30) {
+      return window.alert("Maximum of 30 characters");
+    }
+    if (!amount.trim()) {
+      return window.alert("Enter an Amount");
+    }
+    return true;
+  };
+
   function handleSubmit(event) {
     event.preventDefault();
 
-    setTitle(event.target.value);
-    setAmount(event.target.value);
+    const validation = validateInput({ title, amount });
+
+    if (!validation) {
+      return null;
+    }
   }
 
   return (
@@ -20,24 +36,36 @@ export default function Form() {
       <Title>Create New Bill</Title>
 
       <Container onSubmit={handleSubmit}>
-        <label htmlFor='title'>Title</label>
+        <label aria-label='input to add participants' htmlFor='title'>
+          Title
+        </label>
+
         <input
           type='text'
           onChange={(event) => setTitle(event.target.value)}
           value={title}
           name='title'
+          pattern='^[a-zA-Z0-9öÖäÄüÜ][a-zA-Z0-9_. ß]{1,}'
+          maxLength='15'
+          minLength='2'
           id='title'
         />
-        <label htmlFor='amount'>Amount</label>
+        <label aria-label='amount' htmlFor='amount'>
+          Amount
+        </label>
         <input
-          type='number'
+          type='text'
           onChange={(event) => setAmount(event.target.value)}
           value={amount}
+          minLength='2'
           name='amount'
           placeholder='00.00'
           id='amount'
         />
         <AddParticipants />
+        <button type='submit' onClick={handleSubmit}>
+          Submit
+        </button>
       </Container>
     </>
   );

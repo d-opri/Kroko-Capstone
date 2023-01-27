@@ -7,8 +7,25 @@ function AddParticipants() {
   const [addName, setAddName] = useState("");
   const [isPaid, setIsPaid] = useState(false);
 
+  const validateInput = ({ addName }) => {
+    if (!addName.trim()) {
+      return window.alert("Enter a name");
+    }
+    if (!addName.length < 15) {
+      return window.alert("Maximum of 15 characters");
+    }
+    return true;
+  };
+
   function handleAddItem(event) {
     event.preventDefault();
+
+    const validation = validateInput({ addName });
+
+    if (!validation) {
+      return null;
+    }
+
     setAddName("");
     setList([
       ...list,
@@ -30,9 +47,9 @@ function AddParticipants() {
       <label htmlFor='input'>Add Participants</label>
       <input
         value={addName}
+        pattern='^[0-9,.]{1,10}'
         name='input'
         id='input'
-        maxLength={15}
         onChange={(event) => setAddName(event.target.value)}
         type='text'
         placeholder='Add Name'
