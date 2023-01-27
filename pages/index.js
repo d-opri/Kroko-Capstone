@@ -1,5 +1,9 @@
-import Activity from "@/pages/activity";
+import Activity from "./activity";
 
 export default function HomePage() {
-  return <Activity />;
+  return (
+    <>
+      <Activity />
+    </>
+  );
 }
