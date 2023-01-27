@@ -3,10 +3,6 @@ import styled from "styled-components";
 import Link from "next/link";
 import AddParticipants from "../components/AddParticipants";
 
-function calculateBillSplit({ onSubmit }) {
-  alert("Coming soon..");
-}
-
 export default function Form() {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -14,7 +10,8 @@ export default function Form() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    calculateBillSplit(Form);
+    setTitle(event.target.value);
+    setAmount(event.target.value);
   }
 
   return (
@@ -41,7 +38,6 @@ export default function Form() {
           id='amount'
         />
         <AddParticipants />
-        <button type='submit'>Calculate Bill</button>
       </Container>
     </>
   );

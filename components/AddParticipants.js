@@ -32,6 +32,7 @@ function AddParticipants() {
         value={addName}
         name='input'
         id='input'
+        maxLength={15}
         onChange={(event) => setAddName(event.target.value)}
         type='text'
         placeholder='Add Name'
