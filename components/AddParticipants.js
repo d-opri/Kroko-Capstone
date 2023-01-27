@@ -11,7 +11,7 @@ function AddParticipants() {
     if (!addName.trim()) {
       return window.alert("Enter a name");
     }
-    if (!addName.length < 15) {
+    if (addName.length < 15) {
       return window.alert("Maximum of 15 characters");
     }
     return true;
