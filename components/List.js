@@ -5,7 +5,7 @@ export default function List({ props }) {
   return (
     <>
       <ListLayout>
-        {props.items.map((item) => (
+        {props?.items.map((item) => (
           <ItemLayout key={item.id}>
             <TitleText>{item.title}</TitleText>
             <Link href={`/bill-entry/${item.id}`}>View Details</Link>

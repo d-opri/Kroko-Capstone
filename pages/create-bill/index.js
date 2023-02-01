@@ -1,74 +1,81 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import AddParticipants from "../../components/AddParticipants";
-import Button from "@/components/Button";
-import { useRouter } from "next/router";
 import uuid from "react-uuid";
+import BillDetails from "@/components/BillDetails";
 
 export default function BillForm() {
-  const router = useRouter();
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [participants, setParticipants] = useState([
     {
       name: "",
       id: uuid(),
-      balance: 0,
+      paid: 0,
     },
   ]);
   const [results, setResults] = useState([]);
 
-  const validateInput = ({ title, amount }) => {
-    if (!title.trim()) {
-      return window.alert("Enter a Title");
-    }
-    if (title.length > 50) {
-      return window.alert("Maximum of 50 characters");
-    }
-    if (!amount.trim()) {
-      return window.alert("Enter an Amount");
-    }
-    return true;
-  };
+  // function validateTitle(title) {
+  //   const regex = /^[a-zA-Z0-9 ]{2,30}$/;
+  //   return regex.test(title);
+  // }
+
+  // function validateAmount(amount) {
+  //   return typeof amount === "number" && amount >= 1 && amount <= 10000;
+  // }
+
+  // function validateParticipant(participant) {
+  //   const regex = /^[a-zA-Z0-9 ]{2,15}$/;
+  //   return regex.test(participant);
+  // }
+
+  // function validateBalance(balance, maxAmount) {
+  //   return typeof balance === "number" && balance >= 1 && balance <= maxAmount;
+  // }
 
   function handleAddParticipant(event) {
     event.preventDefault();
-
-    const validation = validateInput({ participants });
-
-    if (!validation) {
-      return null;
-    }
     setParticipants([
       ...participants,
       {
         name: "",
         id: uuid(),
-        balance: 0,
+        paid: 0,
       },
     ]);
   }
+
   function handleDeleteParticipant(id) {
-    const newList = participants.filter((participant) => participant.id !== id);
-    setParticipants(newList);
+    setParticipants(
+      participants.filter((participant) => participant.id !== id)
+    );
   }
 
-  function handleCalculate(event) {
+  function handleParticipantChange(event, index) {
+    const newParticipants = [...participants];
+    newParticipants[index][event.target.name] = event.target.value;
+    setParticipants(newParticipants);
+  }
+
+  function handleSubmit(event) {
     event.preventDefault();
+    // if (
+    //   !validateTitle(title) ||
+    //   !validateAmount(amount) ||
+    //   !validateParticipant(participant) ||
+    //   !validateBalance(balance, amount)
+    // ) {
+    //   console.error("One or more fields are invalid");
+    //   return;
+    // }
 
-    const validation = validateInput({ title, amount });
-
-    if (!validation) {
-      return null;
-    }
-    const evenSplit = amount / participants.length;
+    const fairShare = amount / participants.length;
     const newBalance = participants.map((participant) => {
-      const balance = evenSplit - participant.balance;
+      const balance = fairShare - participant.paid;
       return {
         name: participant.name,
-        id: participant.id,
-        balance: balance > 0 ? `owes ${balance}` : `is owed §{-balance}`,
+        balance: balance > 0 ? ` owes ${balance} $` : ` is owed ${-balance} $`,
       };
     });
     setResults(newBalance);
@@ -82,33 +89,73 @@ export default function BillForm() {
       <Container onSubmit={handleSubmit}>
         <label aria-label='input to add participants' htmlFor='title'>
           Title
+          <input
+            type='text'
+            onChange={(event) => setTitle(event.target.value)}
+            value={title}
+            name='title'
+            id='title'
+          />
         </label>
 
-        <input
-          type='text'
-          onChange={(event) => setTitle(event.target.value)}
-          value={title}
-          name='title'
-          pattern='^[a-zA-Z0-9öÖäÄüÜ][a-zA-Z0-9_. ß]{1,}'
-          maxLength='15'
-          minLength='2'
-          id='title'
-        />
         <label aria-label='amount' htmlFor='amount'>
           Amount
+          <input
+            type='number'
+            onChange={(event) => setAmount(event.target.value)}
+            value={amount}
+            name='amount'
+            placeholder='00.00'
+            id='amount'
+          />
         </label>
-        <input
-          type='text'
-          onChange={(event) => setAmount(event.target.value)}
-          value={amount}
-          minLength='2'
-          name='amount'
-          placeholder='00.00'
-          id='amount'
-        />
-        <AddParticipants value={paidBy} />
-        <Button type='submit'>Calculate</Button>
+        <button type='button' onClick={handleAddParticipant}>
+          Add a participant
+        </button>
+
+        {participants.map((participant, index) => (
+          <li key={index}>
+            <label htmlFor={index}>
+              <input
+                type='text'
+                placeholder='Add Name'
+                id={index}
+                name='name'
+                value={participant.name}
+                onChange={(event) => handleParticipantChange(event, index)}
+              />
+            </label>
+            <label htmlFor={index}>
+              Paid:
+              <input
+                type='number'
+                id={index}
+                name='paid'
+                value={participant.paid}
+                onChange={(event) => handleParticipantChange(event, index)}
+              />
+            </label>
+            <button
+              type='button'
+              onClick={() => handleDeleteParticipant(participant.id)}
+            >
+              X
+            </button>
+          </li>
+        ))}
+
+        <button type='submit'>Calculate Split</button>
       </Container>
+      {results.length > 0 && (
+        <BillDetails title={title} total={amount}>
+          {results.map((participant, index) => (
+            <div key={index}>
+              {participant.name}
+              {participant.balance}
+            </div>
+          ))}
+        </BillDetails>
+      )}
     </>
   );
 }

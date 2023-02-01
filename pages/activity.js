@@ -8,7 +8,7 @@ export default function Activity() {
   return (
     <>
       <Title>Activity</Title>
-      <StyledLink href='/createBill'>Create New Bill</StyledLink>
+      <StyledLink href='./create-bill'>Create New Bill</StyledLink>
       <List items={listItems} />
     </>
   );
