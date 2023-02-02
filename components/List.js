@@ -1,12 +1,14 @@
+import Link from "next/link";
 import styled from "styled-components";
 
-export default function List(props) {
+export default function List({ props }) {
   return (
     <>
       <ListLayout>
-        {props.items.map((item) => (
+        {props?.items.map((item) => (
           <ItemLayout key={item.id}>
             <TitleText>{item.title}</TitleText>
+            <Link href={`/bill-entry/${item.id}`}>View Details</Link>
 
             <AmountText
               style={{
