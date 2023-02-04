@@ -1,7 +1,12 @@
-import { createBill } from "../../../helpers/db";
+import { getAllBills, createBill } from "@/helpers/db";
 
 export default async function handler(request, response) {
   switch (request.method) {
+    case "GET": {
+      const bills = await getAllBills();
+      response.status(200).json(bills);
+      break;
+    }
     case "POST": {
       const bill = JSON.parse(request.body);
       const createdBill = await createBill(bill);
@@ -11,7 +16,7 @@ export default async function handler(request, response) {
     default: {
       response
         .status(405)
-        .setHeader("Allow", "POST")
+        .setHeader("Allow", "POST, GET")
         .json({
           message: `Request method ${request.method} is not allowed on ${request.url}`,
         });

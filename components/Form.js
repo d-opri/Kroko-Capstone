@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import uuid from "react-uuid";
-import BillDetails from "@/components/BillDetails";
-import calculateSplit from "@/utils/calculateSplit";
 
-export default function BillForm() {
+export default function BillForm({ onSubmit }) {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [participants, setParticipants] = useState([
@@ -15,6 +13,10 @@ export default function BillForm() {
       paid: 0,
     },
   ]);
+  const [balance, setBalance] = useState({
+    name: "",
+    balance: 0,
+  });
 
   function handleAddParticipant(event) {
     event.preventDefault();
@@ -40,6 +42,18 @@ export default function BillForm() {
     setParticipants(newParticipants);
   }
 
+  async function calculateSplit(amount, participants) {
+    const evenSplit = amount / participants.length;
+    const newBalance = participants.map((participant) => {
+      const share = evenSplit - participant.paid;
+      return {
+        name: participant.name,
+        balance: balance > 0 ? ` owes ${share} $` : ` is owed ${-share} $`,
+      };
+    });
+    return setBalance(newBalance);
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -47,10 +61,10 @@ export default function BillForm() {
       title,
       amount,
       participants,
+      balance,
     };
     const data = Object.fromEntries(Object.entries(formData));
 
-    calculateSplit(data);
     onSubmit(data);
   }
 
@@ -117,18 +131,10 @@ export default function BillForm() {
           </li>
         ))}
 
-        <button type='submit'>Calculate Split</button>
+        <button type='submit' onClick={calculateSplit}>
+          Calculate Split
+        </button>
       </Container>
-      {results.length > 0 && (
-        <BillDetails title={title} total={amount}>
-          {results.map((participant, index) => (
-            <div key={index}>
-              {participant.name}
-              {participant.balance}
-            </div>
-          ))}
-        </BillDetails>
-      )}
     </>
   );
 }

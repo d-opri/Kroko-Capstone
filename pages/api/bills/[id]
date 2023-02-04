@@ -1,0 +1,48 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import calculateSplit from "./../../../utils/calculateSplit";
+
+const Results = () => {
+  const router = useRouter();
+  const { data, isLoading, error } = useSWR(`/api/places`, fetch);
+  const { isReady } = router;
+
+  if (error) return <div>I failed</div>;
+  if (!data) return <div>One moment...</div>;
+  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+
+  const result = calculateSplit(data);
+
+  router.push("/");
+
+  return (
+    <>
+      <Title>{result.title}</Title>
+      <p>Total Amount: {result.amount}</p>
+      <Link href={"/"}>
+        <button type='button' onClick={handleSave}>
+          Save
+        </button>
+      </Link>
+
+      <h2>Participants</h2>
+      <ul>
+        {result.participants.map((participant) => (
+          <li key={participant.name}>
+            <p>Name: {participant.name}</p>
+            <p>Balance: {participant.balance}</p>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
+
+export default Results;
+
+const Title = styled.h1`
+  font-size: var(--fs-title);
+  text-align: center;
+  padding-block: 3rem;
+`;
