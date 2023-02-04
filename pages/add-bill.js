@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Form from "@/components/BillForm";
+import Form from "@/components/Form";
 
 export default function AddBill() {
   const router = useRouter();
@@ -11,8 +11,8 @@ export default function AddBill() {
         body: JSON.stringify(bill),
       });
 
-      if (response.status === 200) {
-        router.push("/result");
+      if (response.status === 201) {
+        router.push("/");
       }
     } catch (error) {
       console.error(error);
@@ -22,9 +22,6 @@ export default function AddBill() {
   return (
     <>
       <Form onSubmit={addBill} />
-      <button type='submit' onClick={handleSubmit}>
-        Add Bill
-      </button>
     </>
   );
 }

@@ -3,31 +3,22 @@ import styled from "styled-components";
 
 const ListItem = ({ bill }) => {
   return (
-    <ListLayout>
-      <ItemLayout>
-        <TitleText>{bill.title}</TitleText>
+    <ItemLayout>
+      <TitleText>{bill.title}</TitleText>
 
-        <AmountText
-          style={{
-            color:
-              bill.amount > 0
-                ? "var(--positive-balance)"
-                : "var(--negative-balance)",
-          }}
-        >
-          {bill.amount} $
-        </AmountText>
-      </ItemLayout>
-    </ListLayout>
+      <AmountText
+        style={{
+          color:
+            bill.amount > 0
+              ? "var(--positive-balance)"
+              : "var(--negative-balance)",
+        }}
+      >
+        {bill.amount} $
+      </AmountText>
+    </ItemLayout>
   );
 };
-
-const ListLayout = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-`;
 
 const ItemLayout = styled.li`
   background: var(--clr-secondary);

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "next/link.js";
 import uuid from "react-uuid";
 
-function Form({ onSubmit }) {
+export default function Form({ onSubmit }) {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState(0);
   const [participants, setParticipants] = useState([
@@ -49,7 +49,7 @@ function Form({ onSubmit }) {
       amount,
       participants,
     };
-    const data = Object.fromEntries(formData);
+    const data = Object.fromEntries(Object.entries(formData));
 
     onSubmit(data);
   }
@@ -120,12 +120,11 @@ function Form({ onSubmit }) {
             </button>
           </li>
         ))}
+        <button type='submit'>Add Bill</button>
       </Container>
     </>
   );
 }
-
-export default Form;
 
 const StyledLink = styled(Link)`
   color: black;

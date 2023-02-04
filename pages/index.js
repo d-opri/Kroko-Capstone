@@ -14,11 +14,11 @@ export default function Activity() {
     <>
       <Title>Activity</Title>
       <StyledLink href='./add-bill'>Add New Bill</StyledLink>
-      <ul>
+      <ListLayout>
         {data.map((bill) => (
           <ListItem key={bill.id} bill={bill} />
         ))}
-      </ul>
+      </ListLayout>
     </>
   );
 }
@@ -41,4 +41,13 @@ const Title = styled.h1`
   font-size: var(--fs-title);
   text-align: center;
   padding-block: 3rem;
+`;
+
+const ListLayout = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-left: 2em;
+  margin-right: 2em;
 `;

@@ -1,23 +1,30 @@
-import styled from "styled-components";
-
-function BillDetails({ title, total, children }) {
+const BillDetails = ({ title, amount, participants }) => {
   return (
-    <Container>
-      <h2>{title}</h2>
-      <h3>Total</h3>
-      <p>{total} </p>
-      <h3>Participants</h3>
-      {children}
-    </Container>
+    <StyledContainer>
+      <Title>{title}</Title>
+      <p>Total amount: {amount}</p>
+      <h2>Participants</h2>
+      <ul>
+        {participants.map((participant) => (
+          <li key={participant.name}>
+            {participant.name}: {participant.balance}
+          </li>
+        ))}
+      </ul>
+    </StyledContainer>
   );
-}
+};
 
-const Container = styled.main`
+export default BillDetails;
+
+const StyledContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: aliceblue;
-  margin-top: 4em;
 `;
 
-export default BillDetails;
+const Title = styled.h1`
+  font-size: var(--fs-title);
+  text-align: center;
+  padding-block: 5rem;
+`;
