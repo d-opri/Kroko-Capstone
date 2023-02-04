@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "next/link.js";
 import uuid from "react-uuid";
 
-function Form() {
+function Form({ onSubmit }) {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState(0);
   const [participants, setParticipants] = useState([
@@ -42,8 +42,16 @@ function Form() {
     setParticipants(newParticipants);
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    const formData = {
+      title,
+      amount,
+      participants,
+    };
+    const data = Object.fromEntries(formData);
+
+    onSubmit(data);
   }
 
   return (
