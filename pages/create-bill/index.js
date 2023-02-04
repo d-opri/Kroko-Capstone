@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import uuid from "react-uuid";
 import BillDetails from "@/components/BillDetails";
+import calculateSplit from "@/utils/calculateSplit";
 
 export default function BillForm() {
   const [title, setTitle] = useState("");
@@ -15,24 +16,6 @@ export default function BillForm() {
     },
   ]);
   const [results, setResults] = useState([]);
-
-  // function validateTitle(title) {
-  //   const regex = /^[a-zA-Z0-9 ]{2,30}$/;
-  //   return regex.test(title);
-  // }
-
-  // function validateAmount(amount) {
-  //   return typeof amount === "number" && amount >= 1 && amount <= 10000;
-  // }
-
-  // function validateParticipant(participant) {
-  //   const regex = /^[a-zA-Z0-9 ]{2,15}$/;
-  //   return regex.test(participant);
-  // }
-
-  // function validateBalance(balance, maxAmount) {
-  //   return typeof balance === "number" && balance >= 1 && balance <= maxAmount;
-  // }
 
   function handleAddParticipant(event) {
     event.preventDefault();
@@ -60,25 +43,16 @@ export default function BillForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // if (
-    //   !validateTitle(title) ||
-    //   !validateAmount(amount) ||
-    //   !validateParticipant(participant) ||
-    //   !validateBalance(balance, amount)
-    // ) {
-    //   console.error("One or more fields are invalid");
-    //   return;
-    // }
 
-    const fairShare = amount / participants.length;
-    const newBalance = participants.map((participant) => {
-      const balance = fairShare - participant.paid;
-      return {
-        name: participant.name,
-        balance: balance > 0 ? ` owes ${balance} $` : ` is owed ${-balance} $`,
-      };
-    });
-    setResults(newBalance);
+    const formData = {
+      title,
+      amount,
+      participants,
+    };
+    const data = Object.fromEntries(Object.entries(formData));
+
+    calculateSplit(data);
+    onSubmit(data);
   }
 
   return (
