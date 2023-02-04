@@ -15,7 +15,6 @@ export default function BillForm() {
       paid: 0,
     },
   ]);
-  const [results, setResults] = useState([]);
 
   function handleAddParticipant(event) {
     event.preventDefault();
