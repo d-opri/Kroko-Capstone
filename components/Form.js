@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import uuid from "react-uuid";
-import BillDetails from "@/components/BillDetails";
 
-export default function BillForm() {
+export default function BillForm({ onSubmit }) {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [participants, setParticipants] = useState([
@@ -14,25 +13,10 @@ export default function BillForm() {
       paid: 0,
     },
   ]);
-  const [results, setResults] = useState([]);
-
-  // function validateTitle(title) {
-  //   const regex = /^[a-zA-Z0-9 ]{2,30}$/;
-  //   return regex.test(title);
-  // }
-
-  // function validateAmount(amount) {
-  //   return typeof amount === "number" && amount >= 1 && amount <= 10000;
-  // }
-
-  // function validateParticipant(participant) {
-  //   const regex = /^[a-zA-Z0-9 ]{2,15}$/;
-  //   return regex.test(participant);
-  // }
-
-  // function validateBalance(balance, maxAmount) {
-  //   return typeof balance === "number" && balance >= 1 && balance <= maxAmount;
-  // }
+  const [balance, setBalance] = useState({
+    name: "",
+    balance: 0,
+  });
 
   function handleAddParticipant(event) {
     event.preventDefault();
@@ -58,27 +42,30 @@ export default function BillForm() {
     setParticipants(newParticipants);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    // if (
-    //   !validateTitle(title) ||
-    //   !validateAmount(amount) ||
-    //   !validateParticipant(participant) ||
-    //   !validateBalance(balance, amount)
-    // ) {
-    //   console.error("One or more fields are invalid");
-    //   return;
-    // }
-
-    const fairShare = amount / participants.length;
+  async function calculateSplit(amount, participants) {
+    const evenSplit = amount / participants.length;
     const newBalance = participants.map((participant) => {
-      const balance = fairShare - participant.paid;
+      const share = evenSplit - participant.paid;
       return {
         name: participant.name,
-        balance: balance > 0 ? ` owes ${balance} $` : ` is owed ${-balance} $`,
+        balance: balance > 0 ? ` owes ${share} $` : ` is owed ${-share} $`,
       };
     });
-    setResults(newBalance);
+    return setBalance(newBalance);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const formData = {
+      title,
+      amount,
+      participants,
+      balance,
+    };
+    const data = Object.fromEntries(Object.entries(formData));
+
+    onSubmit(data);
   }
 
   return (
@@ -144,18 +131,10 @@ export default function BillForm() {
           </li>
         ))}
 
-        <button type='submit'>Calculate Split</button>
+        <button type='submit' onClick={calculateSplit}>
+          Calculate Split
+        </button>
       </Container>
-      {results.length > 0 && (
-        <BillDetails title={title} total={amount}>
-          {results.map((participant, index) => (
-            <div key={index}>
-              {participant.name}
-              {participant.balance}
-            </div>
-          ))}
-        </BillDetails>
-      )}
     </>
   );
 }
