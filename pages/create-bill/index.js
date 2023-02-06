@@ -121,18 +121,29 @@ export default function BillForm({ addBill }) {
         <button type='submit'>Calculate Split</button>
       </Container>
       {results.length > 0 && (
-        <BillDetails title={title} total={amount}>
-          {results.map((participant, index) => (
-            <div key={index}>
-              {participant.name}
-              {participant.balance}
-            </div>
-          ))}
-        </BillDetails>
+        <>
+          <BillDetails title={title} total={amount}>
+            {results.map((participant, index) => (
+              <div key={index}>
+                {participant.name}
+                {participant.balance}
+              </div>
+            ))}
+            <Link href={"/"}>
+              <Button type='button'>Back to Dashboard</Button>
+            </Link>
+          </BillDetails>
+        </>
       )}
     </>
   );
 }
+const Button = styled.button`
+  align-items: center;
+  display: flex;
+  margin: auto;
+  margin-top: 2em;
+`;
 
 const StyledLink = styled(Link)`
   color: black;
