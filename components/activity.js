@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import List from "../components/List";
+import List from "./List";
 import listItems from "../db";
 import Link from "next/link";
 
