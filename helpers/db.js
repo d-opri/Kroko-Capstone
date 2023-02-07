@@ -11,9 +11,9 @@ const billSchema = new Schema({
       id: String,
       name: String,
       paid: { type: Number },
+      balance: String,
     },
   ],
-  balance: { type: Number },
 });
 
 const Bill = models.Bill || model("Bill", billSchema);
@@ -32,6 +32,12 @@ async function createBill(bill) {
   return createdBill;
 }
 
+async function getBill(id) {
+  await connectDatabase();
+  const bill = await Bill.findOne({ id });
+  return bill;
+}
+
 async function getAllBills() {
   await connectDatabase();
 
@@ -39,4 +45,4 @@ async function getAllBills() {
   return bills;
 }
 
-export { getAllBills, createBill };
+export { getAllBills, getBill, createBill };

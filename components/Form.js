@@ -47,9 +47,11 @@ export default function BillForm({ addBill }) {
       const balance = Number(fairShare - participant.paid).toFixed(2);
       return {
         name: participant.name,
+        paid: participant.paid,
         balance: balance > 0 ? ` owes ${balance} $` : ` is owed ${-balance} $`,
       };
     });
+
     setResults(newBalance);
     const newBill = { title, amount, participants: newBalance };
     addBill(newBill);

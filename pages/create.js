@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import BillForm from "./create-bill";
+import BillForm from "../components/Form";
 
-export default function CreateBill() {
+export default function CreateBill({ bill }) {
   const router = useRouter();
 
   async function addBill(bill) {
@@ -9,11 +9,11 @@ export default function CreateBill() {
       method: "POST",
       body: JSON.stringify(bill),
     });
-    router.push("/");
+    router.push("/bills/${id}");
   }
   return (
     <>
-      <BillForm bill={bill} onSubmit={addBill} />
+      <BillForm bill={bill} addBill={addBill} />
     </>
   );
 }

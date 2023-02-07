@@ -2,13 +2,24 @@ import GlobalStyle from "@/styles";
 import Head from "next/head";
 import { SWRConfig } from "swr";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
   const [bill, setBill] = useState(null);
+  const router = useRouter();
 
-  function addBill(newBill) {
-    setBill(newBill);
+  async function addBill(bill) {
+    await fetch("api/bills", {
+      method: "POST",
+      body: JSON.stringify(bill),
+    });
+    setBill(bill);
+    router.push("/bills/${id}");
   }
+
+  // function addBill(newBill) {
+  //   setBill(newBill);
+  // }
   return (
     <SWRConfig
       value={{

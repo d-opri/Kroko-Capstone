@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-function BillDetails({ title, total, children }) {
+function BillDetails({ title, amount, children }) {
   return (
     <Container>
       <Title>{title}</Title>
-      <Title>Total: {total} $</Title>
+      <Title>Total: {amount} $</Title>
       <Title>Participants</Title>
-      <Caption>{children}</Caption>
+      <List>{children}</List>
     </Container>
   );
 }
@@ -15,8 +15,9 @@ const Title = styled.h2`
   font-size: var(--fs-caption);
 `;
 
-const Caption = styled.p`
+const List = styled.ul`
   font-size: var(--fs-caption);
+  list-style: none;
 `;
 
 const Container = styled.main`

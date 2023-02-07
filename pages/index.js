@@ -1,17 +1,21 @@
-import Activity from "../components/activity";
 import Link from "next/link";
 import styled from "styled-components";
+import useSWR from "swr";
 
-export default function HomePage({ bill }) {
+export default function HomePage() {
+  const { data: bill } = useSWR("api/bills");
+
   return (
     <>
-      <Activity />
+      <Title>Split Me</Title>
+      <StyledLink href='/create'>Create New Bill</StyledLink>
+
       {bill && (
         <ListLayout>
-          {bill.participants.map((item) => (
+          {bill.map((item) => (
             <ItemLayout key={item.id}>
               <TitleText>{item.title}</TitleText>
-              <Link href={`/bill-entry/${item.id}`}>View Details</Link>
+              <Link href={`/bills/${item.id}`}>View Details</Link>
 
               <AmountText
                 style={{
@@ -59,4 +63,24 @@ const TitleText = styled.h3`
 const AmountText = styled.p`
   font-size: var(--fs-links);
   text-align: center;
+`;
+
+const StyledLink = styled(Link)`
+  background-color: white;
+  border-radius: 3em;
+  border: 2px solid black;
+  padding: 0.7em;
+
+  width: 10em;
+  color: black;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  font-weight: 700;
+`;
+
+const Title = styled.h1`
+  font-size: var(--fs-title);
+  text-align: center;
+  padding-block: 3rem;
 `;
