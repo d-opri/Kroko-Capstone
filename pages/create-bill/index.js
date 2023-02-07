@@ -4,7 +4,7 @@ import Link from "next/link";
 import uuid from "react-uuid";
 import BillDetails from "@/components/BillDetails";
 
-export default function BillForm() {
+export default function BillForm({ addBill }) {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [participants, setParticipants] = useState([
@@ -15,24 +15,6 @@ export default function BillForm() {
     },
   ]);
   const [results, setResults] = useState([]);
-
-  // function validateTitle(title) {
-  //   const regex = /^[a-zA-Z0-9 ]{2,30}$/;
-  //   return regex.test(title);
-  // }
-
-  // function validateAmount(amount) {
-  //   return typeof amount === "number" && amount >= 1 && amount <= 10000;
-  // }
-
-  // function validateParticipant(participant) {
-  //   const regex = /^[a-zA-Z0-9 ]{2,15}$/;
-  //   return regex.test(participant);
-  // }
-
-  // function validateBalance(balance, maxAmount) {
-  //   return typeof balance === "number" && balance >= 1 && balance <= maxAmount;
-  // }
 
   function handleAddParticipant(event) {
     event.preventDefault();
@@ -60,16 +42,6 @@ export default function BillForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // if (
-    //   !validateTitle(title) ||
-    //   !validateAmount(amount) ||
-    //   !validateParticipant(participant) ||
-    //   !validateBalance(balance, amount)
-    // ) {
-    //   console.error("One or more fields are invalid");
-    //   return;
-    // }
-
     const fairShare = amount / participants.length;
     const newBalance = participants.map((participant) => {
       const balance = fairShare - participant.paid;
@@ -79,6 +51,8 @@ export default function BillForm() {
       };
     });
     setResults(newBalance);
+    const newBill = { title, amount, participants: newBalance };
+    addBill(newBill);
   }
 
   return (
@@ -147,18 +121,29 @@ export default function BillForm() {
         <button type='submit'>Calculate Split</button>
       </Container>
       {results.length > 0 && (
-        <BillDetails title={title} total={amount}>
-          {results.map((participant, index) => (
-            <div key={index}>
-              {participant.name}
-              {participant.balance}
-            </div>
-          ))}
-        </BillDetails>
+        <>
+          <BillDetails title={title} total={amount}>
+            {results.map((participant, index) => (
+              <div key={index}>
+                {participant.name}
+                {participant.balance}
+              </div>
+            ))}
+            <Link href={"/"}>
+              <Button type='button'>Back to Dashboard</Button>
+            </Link>
+          </BillDetails>
+        </>
       )}
     </>
   );
 }
+const Button = styled.button`
+  align-items: center;
+  display: flex;
+  margin: auto;
+  margin-top: 2em;
+`;
 
 const StyledLink = styled(Link)`
   color: black;
