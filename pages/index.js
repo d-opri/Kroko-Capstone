@@ -1,4 +1,3 @@
-import BillDetails from "@/components/BillDetails.js";
 import Activity from "../components/activity";
 import Link from "next/link";
 import styled from "styled-components";
@@ -26,13 +25,6 @@ export default function HomePage({ bill }) {
               </AmountText>
             </ItemLayout>
           ))}
-
-          {/* {bill.participants.map((participant) => {
-            <div key={participant.id}>
-              {participant.name}
-              {participant.balance}
-            </div>;
-          })} */}
         </ListLayout>
       )}
     </>
