@@ -42,9 +42,9 @@ export default function BillForm({ addBill }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const fairShare = amount / participants.length;
+    const fairShare = Number(amount / participants.length).toFixed(2);
     const newBalance = participants.map((participant) => {
-      const balance = fairShare - participant.paid;
+      const balance = Number(fairShare - participant.paid).toFixed(2);
       return {
         name: participant.name,
         balance: balance > 0 ? ` owes ${balance} $` : ` is owed ${-balance} $`,
