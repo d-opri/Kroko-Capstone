@@ -47,4 +47,13 @@ async function getAllBills() {
   return bills;
 }
 
-export { getAllBills, getBill, createBill };
+async function updateBill(id, bill) {
+  await connectDatabase();
+  await Bill.updateOne({ id }, bill);
+
+  const updateBill = getBill(id);
+
+  return updateBill;
+}
+
+export { getAllBills, getBill, updateBill, createBill };
