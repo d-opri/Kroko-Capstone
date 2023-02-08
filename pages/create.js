@@ -5,11 +5,13 @@ export default function CreateBill({ bill }) {
   const router = useRouter();
 
   async function addBill(bill) {
-    await fetch("api/bills", {
+    const response = await fetch("api/bills", {
       method: "POST",
       body: JSON.stringify(bill),
     });
-    router.push("/bills/${id}");
+
+    const createdBill = await response.json();
+    router.push(`/bills/${createdBill.id}`);
   }
   return (
     <>
