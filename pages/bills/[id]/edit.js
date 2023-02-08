@@ -25,7 +25,7 @@ export default function EditBillPage() {
       <StyledLink href={`/bills/${id}`}>X</StyledLink>
       <Title>Edit Bill</Title>
 
-      <BillForm onSubmit={editBill} bill={bill} />
+      <BillForm addBill={editBill} bill={bill} />
     </>
   );
 }

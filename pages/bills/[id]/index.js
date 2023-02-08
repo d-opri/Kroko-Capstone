@@ -19,9 +19,7 @@ export default function BillPageDetails() {
           {participant.balance}.
         </li>
       ))}
-      <Link href={`/bills/${id}/edit`}>
-        <button type='button'>Edit Bill</button>
-      </Link>
+
       <Link href={"/"}>
         <button type='button'>Back to Dashboard</button>
       </Link>
