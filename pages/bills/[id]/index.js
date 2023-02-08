@@ -12,7 +12,7 @@ export default function BillPageDetails() {
   if (isLoading || error) return <h2>Loading Bill..</h2>;
 
   return (
-    <BillDetails title={bill.title} total={bill.amount}>
+    <BillDetails title={bill.title} amount={bill.amount}>
       {bill.participants.map((participant, index) => (
         <li key={index}>
           {participant.name} paid {participant.paid} $, and{" "}
