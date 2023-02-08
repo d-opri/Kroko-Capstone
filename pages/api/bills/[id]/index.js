@@ -4,7 +4,14 @@ export default async function handler(request, response) {
   switch (request.method) {
     case "GET": {
       const bill = await getBill(request.query.id);
-      response.status(200).json(bill);
+      if (!bill) {
+        response.status(404).json({
+          message: `Bill ${request.query.id} not found.`,
+        });
+      } else {
+        response.status(200).json(bill);
+      }
+      break;
     }
     default: {
       response
