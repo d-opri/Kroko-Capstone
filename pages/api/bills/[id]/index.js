@@ -13,6 +13,17 @@ export default async function handler(request, response) {
       }
       break;
     }
+    case "PATCH": {
+      const bill = JSON.parse(request.body);
+      const updatedBill = await updateBill(request.query.id, bill);
+      if (!updatedBill) {
+        response.status(404).json({
+          message: `Bill ${request.query.id} couldn't be found.`,
+        });
+      } else {
+        response.status(200).json(updatedBill);
+      }
+    }
     default: {
       response
         .status(405)
