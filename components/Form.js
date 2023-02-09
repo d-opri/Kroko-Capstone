@@ -11,10 +11,42 @@ export default function BillForm({ addBill }) {
     {
       name: "",
       id: uuid(),
-      paid: 0,
+      paid: "",
     },
   ]);
   const [results, setResults] = useState([]);
+
+  function validateTitle(title) {
+    const regex = /^[a-zA-Z0-9 ]{2,30}$/;
+    return regex.test(title);
+  }
+
+  function validateAmount(amount) {
+    return typeof amount === "number" && amount >= 1 && amount <= 10000;
+  }
+
+  function validateParticipant(participant) {
+    const regex = /^[a-zA-Z0-9 ]{2,15}$/;
+    return regex.test(participant);
+  }
+
+  function validateBalance(balance, maxAmount) {
+    return typeof balance === "number" && balance >= 1 && balance <= maxAmount;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (
+      !validateTitle(title) ||
+      !validateAmount(amount) ||
+      !validateParticipant(participant) ||
+      !validateBalance(balance, amount)
+    ) {
+      console.error("One or more fields are invalid");
+      return;
+    }
+  }
 
   function handleAddParticipant(event) {
     event.preventDefault();
@@ -23,7 +55,7 @@ export default function BillForm({ addBill }) {
       {
         name: "",
         id: uuid(),
-        paid: 0,
+        paid: "",
       },
     ]);
   }
@@ -68,6 +100,9 @@ export default function BillForm({ addBill }) {
             value={title}
             name='title'
             id='title'
+            pattern='/^[a-zA-Z0-9 ]{2,30}$/'
+            maxLength={20}
+            minLength={2}
           />
         </label>
 
@@ -80,6 +115,9 @@ export default function BillForm({ addBill }) {
             name='amount'
             placeholder='00.00'
             id='amount'
+            pattern='/^[1-9]+$/'
+            max='1000000'
+            min='1'
           />
         </label>
         <button type='button' onClick={handleAddParticipant}>
@@ -94,6 +132,9 @@ export default function BillForm({ addBill }) {
                 placeholder='Add Name'
                 id={index}
                 name='name'
+                pattern='/^[a-zA-Z0-9 ]{2,30}$/'
+                maxLength={20}
+                minLength={2}
                 value={participant.name}
                 onChange={(event) => handleParticipantChange(event, index)}
               />
@@ -103,7 +144,11 @@ export default function BillForm({ addBill }) {
               <input
                 type='number'
                 id={index}
+                placeholder='00.00'
                 name='paid'
+                pattern='/^[1-9]+$/'
+                max='1000000'
+                min='1'
                 value={participant.paid}
                 onChange={(event) => handleParticipantChange(event, index)}
               />
