@@ -27,7 +27,7 @@ export default async function handler(request, response) {
     default: {
       response
         .status(405)
-        .setHeader("Allow", "GET")
+        .setHeader("Allow", "GET, PATCH")
         .json({
           message: `Request method ${request.method} is not allowed on ${request.url}`,
         });
