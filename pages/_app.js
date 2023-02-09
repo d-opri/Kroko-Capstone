@@ -17,9 +17,6 @@ export default function App({ Component, pageProps }) {
     router.push("/bills/${id}");
   }
 
-  // function addBill(newBill) {
-  //   setBill(newBill);
-  // }
   return (
     <SWRConfig
       value={{

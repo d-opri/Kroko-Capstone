@@ -91,6 +91,33 @@ export default function BillForm({ addBill }) {
         <button type='button' onClick={handleAddParticipant}>
           Add a participant
         </button>
+        <label htmlFor='You'>
+          <input
+            type='text'
+            placeholder='You'
+            id='You'
+            readOnly
+            name='name'
+            pattern='/^[a-zA-Z0-9 ]{2,30}$/'
+            maxLength={20}
+            minLength={2}
+            value={participants.name}
+          />
+        </label>
+        <label htmlFor='You'>
+          Paid:
+          <input
+            type='number'
+            id='You'
+            placeholder='00.00'
+            name='paid'
+            pattern='/^[1-9]+$/'
+            max='1000000'
+            min='1'
+            value={participants.paid}
+            onChange={(event) => handleParticipantChange(event, index)}
+          />
+        </label>
 
         {participants.map((participant, index) => (
           <li key={index}>
