@@ -68,7 +68,6 @@ export default function BillForm({ addBill }) {
             value={title}
             name='title'
             id='title'
-            pattern='/^[a-zA-Z0-9 ]{2,30}$/'
             maxLength={20}
             minLength={2}
           />
@@ -98,7 +97,6 @@ export default function BillForm({ addBill }) {
             id='You'
             readOnly
             name='name'
-            pattern='/^[a-zA-Z0-9 ]{2,30}$/'
             maxLength={20}
             minLength={2}
             value={participants.name}
@@ -127,7 +125,6 @@ export default function BillForm({ addBill }) {
                 placeholder='Add Name'
                 id={index}
                 name='name'
-                pattern='/^[a-zA-Z0-9 ]{2,30}$/'
                 maxLength={20}
                 minLength={2}
                 value={participant.name}
