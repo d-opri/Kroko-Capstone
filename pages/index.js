@@ -14,9 +14,13 @@ export default function HomePage() {
         <ListLayout>
           {bill.map((item) => (
             <ItemLayout key={item.id}>
-              <TitleText>{item.title}</TitleText>
-              <Link href={`/bills/${item.id}`}>View Details</Link>
-
+              <TitleText>
+                {item.title}
+                <br />
+                <DetailsLink href={`/bills/${item.id}`}>
+                  View Details
+                </DetailsLink>
+              </TitleText>
               <AmountText
                 style={{
                   color:
@@ -61,7 +65,7 @@ const TitleText = styled.h3`
 `;
 
 const AmountText = styled.p`
-  font-size: var(--fs-links);
+  font-size: var(--fs-caption);
   text-align: center;
 `;
 
@@ -77,6 +81,11 @@ const StyledLink = styled(Link)`
   justify-content: center;
   margin: auto;
   font-weight: 700;
+`;
+
+const DetailsLink = styled(Link)`
+  font-size: var(--fs-link);
+  color: var(--clr-link);
 `;
 
 const Title = styled.h1`
