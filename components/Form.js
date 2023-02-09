@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Link from "next/link";
-import uuid from "react-uuid";
-import BillDetails from "@/components/BillDetails";
 
-export default function BillForm({ addBill }) {
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [participants, setParticipants] = useState([
-    {
-      name: "",
-      id: uuid(),
-      paid: "",
-    },
-  ]);
+import uuid from "react-uuid";
+
+export default function BillForm({ addBill, bill }) {
+  const [title, setTitle] = useState(bill ? bill.title : "");
+  const [amount, setAmount] = useState(bill ? bill.amount : "");
+  const [participants, setParticipants] = useState(
+    bill
+      ? bill.participants
+      : [
+          {
+            name: "",
+            id: uuid(),
+            paid: "",
+          },
+        ]
+  );
   const [results, setResults] = useState([]);
 
   function handleAddParticipant(event) {
@@ -71,6 +74,7 @@ export default function BillForm({ addBill }) {
             pattern='^\s*[a-zA-Z,\s]+\s*$'
             maxLength={20}
             minLength={2}
+            required
           />
         </label>
 
@@ -86,37 +90,12 @@ export default function BillForm({ addBill }) {
             pattern='/^[1-9]+$/'
             max='1000000'
             min='1'
+            required
           />
         </label>
         <button type='button' onClick={handleAddParticipant}>
           Add a participant
         </button>
-        <label htmlFor='You'>
-          <input
-            type='text'
-            placeholder='You'
-            id='You'
-            readOnly
-            name='name'
-            maxLength={20}
-            minLength={2}
-            value={participants.name}
-          />
-        </label>
-        <label htmlFor='You'>
-          Paid:
-          <input
-            type='number'
-            id='You'
-            placeholder='00.00'
-            name='paid'
-            pattern='/^[1-9]+$/'
-            max='1000000'
-            min='1'
-            value={participants.paid}
-            onChange={(event) => handleParticipantChange(event, index)}
-          />
-        </label>
 
         {participants.map((participant, index) => (
           <li key={index}>
@@ -126,11 +105,12 @@ export default function BillForm({ addBill }) {
                 placeholder='Add Name'
                 id={index}
                 name='name'
+                value={participant.name}
                 pattern='^\s*[a-zA-Z,\s]+\s*$'
                 maxLength={20}
                 minLength={2}
-                value={participant.name}
                 onChange={(event) => handleParticipantChange(event, index)}
+                required
               />
             </label>
             <label htmlFor={index}>
@@ -145,6 +125,7 @@ export default function BillForm({ addBill }) {
                 min='1'
                 value={participant.paid}
                 onChange={(event) => handleParticipantChange(event, index)}
+                required
               />
             </label>
             <button
@@ -158,7 +139,7 @@ export default function BillForm({ addBill }) {
 
         <button type='submit'>Calculate Split</button>
       </Container>
-      {results.length > 0 && (
+      {/* {results.length > 0 && (
         <>
           <BillDetails title={title} total={amount}>
             {results.map((participant, index) => (
@@ -172,7 +153,7 @@ export default function BillForm({ addBill }) {
             </Link>
           </BillDetails>
         </>
-      )}
+      )} */}
     </>
   );
 }
