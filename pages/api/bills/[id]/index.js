@@ -1,4 +1,4 @@
-import { getBill } from "@/helpers/db";
+import { getBill, updateBill } from "@/helpers/db";
 
 export default async function handler(request, response) {
   switch (request.method) {
