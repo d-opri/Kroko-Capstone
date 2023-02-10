@@ -1,7 +1,7 @@
 import mongoose, { model, models, Schema } from "mongoose";
+import { v4 as uuidv4 } from "uuid";
 
-const URI = `mongodb+srv://Krokodil:${process.env.MONGODB_PASSWORD}@kroko.sd7bt9q.mongodb.net/?retryWrites=true&w=majority`;
-
+const URI = `mongodb+srv://Krokodil:${process.env.MONGODB_PASSWORD}@kroko.sd7bt9q.mongodb.net/keks?retryWrites=true&w=majority`;
 const billSchema = new Schema({
   title: String,
   amount: { type: Number },
@@ -27,6 +27,7 @@ async function createBill(bill) {
 
   const createdBill = await Bill.create({
     ...bill,
+    id: uuidv4(),
   });
 
   return createdBill;
@@ -45,4 +46,13 @@ async function getAllBills() {
   return bills;
 }
 
-export { getAllBills, getBill, createBill };
+async function updateBill(id, bill) {
+  await connectDatabase();
+  await Bill.updateOne({ id }, bill);
+
+  const updateBill = getBill(id);
+
+  return updateBill;
+}
+
+export { getAllBills, getBill, updateBill, createBill };

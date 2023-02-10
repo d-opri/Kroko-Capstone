@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Link from "next/link";
-import uuid from "react-uuid";
-import BillDetails from "@/components/BillDetails";
+import { v4 as uuidv4 } from "uuid";
 
-export default function BillForm({ addBill }) {
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [participants, setParticipants] = useState([
-    {
-      name: "",
-      id: uuid(),
-      paid: 0,
-    },
-  ]);
+export default function BillForm({ onSubmit, bill, isEditPage }) {
+  const [title, setTitle] = useState(bill ? bill.title : "");
+  const [amount, setAmount] = useState(bill ? bill.amount : "");
+  const [participants, setParticipants] = useState(
+    bill
+      ? bill.participants
+      : [
+          {
+            name: "",
+            id: uuidv4(),
+            paid: "",
+          },
+        ]
+  );
   const [results, setResults] = useState([]);
 
   function handleAddParticipant(event) {
@@ -22,8 +24,8 @@ export default function BillForm({ addBill }) {
       ...participants,
       {
         name: "",
-        id: uuid(),
-        paid: 0,
+        id: uuidv4(),
+        paid: "",
       },
     ]);
   }
@@ -48,21 +50,21 @@ export default function BillForm({ addBill }) {
       return {
         name: participant.name,
         paid: participant.paid,
-        balance: balance > 0 ? ` owes ${balance} $` : ` is owed ${-balance} $`,
+        balance:
+          balance > 0
+            ? ` owes ${balance} $`
+            : ` is owed ${(-balance).toFixed(2)} $`,
       };
     });
 
     setResults(newBalance);
     const newBill = { title, amount, participants: newBalance };
-    addBill(newBill);
+    onSubmit(newBill);
   }
 
   return (
     <>
-      <StyledLink href='/'>X</StyledLink>
-      <Title>Create New Bill</Title>
-
-      <Container onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit}>
         <label aria-label='input to add participants' htmlFor='title'>
           Title
           <input
@@ -71,6 +73,10 @@ export default function BillForm({ addBill }) {
             value={title}
             name='title'
             id='title'
+            pattern='^\s*[a-zA-Z,\s]+\s*$'
+            maxLength={20}
+            minLength={2}
+            required
           />
         </label>
 
@@ -83,6 +89,10 @@ export default function BillForm({ addBill }) {
             name='amount'
             placeholder='00.00'
             id='amount'
+            pattern='/^[1-9]+$/'
+            max='1000000'
+            min='1'
+            required
           />
         </label>
         <button type='button' onClick={handleAddParticipant}>
@@ -98,7 +108,11 @@ export default function BillForm({ addBill }) {
                 id={index}
                 name='name'
                 value={participant.name}
+                pattern='^\s*[a-zA-Z,\s]+\s*$'
+                maxLength={20}
+                minLength={2}
                 onChange={(event) => handleParticipantChange(event, index)}
+                required
               />
             </label>
             <label htmlFor={index}>
@@ -106,9 +120,14 @@ export default function BillForm({ addBill }) {
               <input
                 type='number'
                 id={index}
+                placeholder='00.00'
                 name='paid'
+                pattern='/^[0-9]+$/'
+                max='1000000'
+                min='0'
                 value={participant.paid}
                 onChange={(event) => handleParticipantChange(event, index)}
+                required
               />
             </label>
             <button
@@ -120,51 +139,17 @@ export default function BillForm({ addBill }) {
           </li>
         ))}
 
-        <button type='submit'>Calculate Split</button>
-      </Container>
-      {results.length > 0 && (
-        <>
-          <BillDetails title={title} total={amount}>
-            {results.map((participant, index) => (
-              <div key={index}>
-                {participant.name}
-                {participant.balance}
-              </div>
-            ))}
-            <Link href={"/"}>
-              <Button type='button'>Back to Dashboard</Button>
-            </Link>
-          </BillDetails>
-        </>
-      )}
+        <button type='submit'>
+          {isEditPage ? "Save Changes" : "Save Bill"}
+        </button>
+      </StyledForm>
     </>
   );
 }
-const Button = styled.button`
-  align-items: center;
-  display: flex;
-  margin: auto;
-  margin-top: 2em;
-`;
 
-const StyledLink = styled(Link)`
-  color: black;
-  font-size: large;
-  display: flex;
-  justify-content: end;
-  margin: 2em;
-  font-weight: 900;
-`;
-
-const Title = styled.h1`
-  font-size: var(--fs-title);
-  text-align: center;
-  padding-block: 5rem;
-`;
-
-const Container = styled.form`
+const StyledForm = styled.form`
   list-style: none;
-  outline: none;
+
   display: flex;
   flex-direction: column;
   gap: 1em;
