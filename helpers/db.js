@@ -55,4 +55,13 @@ async function updateBill(id, bill) {
   return updateBill;
 }
 
-export { getAllBills, getBill, updateBill, createBill };
+async function deleteBill(id) {
+  await connectDatabase();
+  await Bill.deleteOne({ id });
+
+  const deletedBill = getBill(id);
+
+  return deletedBill;
+}
+
+export { getAllBills, getBill, deleteBill, updateBill, createBill };
