@@ -2,6 +2,7 @@ import BillDetails from "@/components/BillDetails";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import styled from "styled-components";
 
 export default function BillPageDetails() {
   const router = useRouter();
@@ -19,12 +20,20 @@ export default function BillPageDetails() {
           {participant.balance}.
         </li>
       ))}
-      <Link href={`/bills/${id}/edit`}>
-        <button type='button'>Edit Bill</button>
-      </Link>
-      <Link href={"/"}>
-        <button type='button'>Back to Dashboard</button>
-      </Link>
+      <Button href={`/bills/${id}/edit`}>Edit Bill</Button>
+      <Button href={"/"}>Back to Dashboard</Button>
     </BillDetails>
   );
 }
+
+const Button = styled(Link)`
+  display: inline-block;
+  padding: 0.7em 1.5em;
+  background-color: white;
+  border-radius: 3em;
+  background-color: var(--clr-secondary);
+  margin-top: 2em;
+  margin-left: 1em;
+  color: black;
+  text-decoration: none;
+`;

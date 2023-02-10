@@ -61,7 +61,7 @@ export default function BillForm({ addBill, bill, isEditPage }) {
 
   return (
     <>
-      <Container onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit}>
         <label aria-label='input to add participants' htmlFor='title'>
           Title
           <input
@@ -138,12 +138,12 @@ export default function BillForm({ addBill, bill, isEditPage }) {
         <button type='submit'>
           {isEditPage ? "Save Changes" : "Save Bill"}
         </button>
-      </Container>
+      </StyledForm>
     </>
   );
 }
 
-const Container = styled.form`
+const StyledForm = styled.form`
   list-style: none;
 
   display: flex;

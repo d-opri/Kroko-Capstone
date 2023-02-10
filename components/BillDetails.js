@@ -15,16 +15,19 @@ const Title = styled.h2`
   font-size: var(--fs-caption);
 `;
 
-const List = styled.ul`
+const List = styled.div`
   font-size: var(--fs-caption);
   list-style: none;
+  text-align: center;
+  margin-bottom: 1em;
 `;
 
 const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: aliceblue;
+  border-radius: 2em;
+  border: 2px solid black;
   margin: 2em;
 `;
 
