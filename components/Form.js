@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 
-export default function BillForm({ addBill, bill, isEditPage }) {
+export default function BillForm({ onSubmit, bill, isEditPage }) {
   const [title, setTitle] = useState(bill ? bill.title : "");
   const [amount, setAmount] = useState(bill ? bill.amount : "");
   const [participants, setParticipants] = useState(
@@ -59,7 +59,7 @@ export default function BillForm({ addBill, bill, isEditPage }) {
 
     setResults(newBalance);
     const newBill = { title, amount, participants: newBalance };
-    addBill(newBill);
+    onSubmit(newBill);
   }
 
   return (
