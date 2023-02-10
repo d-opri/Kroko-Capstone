@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
-import uuid from "react-uuid";
-
-export default function BillForm({ addBill, bill }) {
+export default function BillForm({ addBill, bill, isEditPage }) {
   const [title, setTitle] = useState(bill ? bill.title : "");
   const [amount, setAmount] = useState(bill ? bill.amount : "");
   const [participants, setParticipants] = useState(
@@ -12,7 +11,7 @@ export default function BillForm({ addBill, bill }) {
       : [
           {
             name: "",
-            id: uuid(),
+            id: uuidv4(),
             paid: "",
           },
         ]
@@ -25,7 +24,7 @@ export default function BillForm({ addBill, bill }) {
       ...participants,
       {
         name: "",
-        id: uuid(),
+        id: uuidv4(),
         paid: "",
       },
     ]);
@@ -120,9 +119,9 @@ export default function BillForm({ addBill, bill }) {
                 id={index}
                 placeholder='00.00'
                 name='paid'
-                pattern='/^[1-9]+$/'
+                pattern='/^[0-9]+$/'
                 max='1000000'
-                min='1'
+                min='0'
                 value={participant.paid}
                 onChange={(event) => handleParticipantChange(event, index)}
                 required
@@ -136,37 +135,17 @@ export default function BillForm({ addBill, bill }) {
             </button>
           </li>
         ))}
-
-        <button type='submit'>Calculate Split</button>
+        <button type='submit'>
+          {isEditPage ? "Save Changes" : "Save Bill"}
+        </button>
       </Container>
-      {/* {results.length > 0 && (
-        <>
-          <BillDetails title={title} total={amount}>
-            {results.map((participant, index) => (
-              <div key={index}>
-                {participant.name}
-                {participant.balance}
-              </div>
-            ))}
-            <Link href={"/"}>
-              <Button type='button'>Back to Dashboard</Button>
-            </Link>
-          </BillDetails>
-        </>
-      )} */}
     </>
   );
 }
-const Button = styled.button`
-  align-items: center;
-  display: flex;
-  margin: auto;
-  margin-top: 2em;
-`;
 
 const Container = styled.form`
   list-style: none;
-  outline: none;
+
   display: flex;
   flex-direction: column;
   gap: 1em;

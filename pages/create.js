@@ -15,12 +15,13 @@ export default function CreateBill({ bill }) {
     const createdBill = await response.json();
     router.push(`/bills/${createdBill.id}`);
   }
+
   return (
     <>
       <StyledLink href='/'>X</StyledLink>
       <Title>Create New Bill</Title>
 
-      <BillForm bill={bill} addBill={addBill} />
+      <BillForm isEditPage={false} bill={bill} addBill={addBill} />
     </>
   );
 }

@@ -23,6 +23,7 @@ export default async function handler(request, response) {
       } else {
         response.status(200).json(updatedBill);
       }
+      break;
     }
     default: {
       response

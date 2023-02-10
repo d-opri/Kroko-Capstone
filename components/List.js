@@ -11,14 +11,6 @@ export default function List({ props }) {
             <Link href={`/bill-entry/${item.id}`}>View Details</Link>
 
             <AmountText
-              //   style={{
-              //     color:
-              //       item.amount > 0
-              //         ? "var(--positive-balance)"
-              //         : "var(--negative-balance)",
-              //   }}
-              // >
-              //   {item.amount} $
               style={{
                 color:
                   item.name === "You"
