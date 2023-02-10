@@ -21,7 +21,7 @@ export default function CreateBill({ bill }) {
       <StyledLink href='/'>X</StyledLink>
       <Title>Create New Bill</Title>
 
-      <BillForm isEditPage={true} bill={bill} addBill={addBill} />
+      <BillForm isEditPage={false} bill={bill} addBill={addBill} />
     </>
   );
 }

@@ -138,6 +138,7 @@ export default function BillForm({ addBill, bill, isEditPage }) {
             </button>
           </li>
         ))}
+
         <button type='submit'>
           {isEditPage ? "Save Changes" : "Save Bill"}
         </button>
