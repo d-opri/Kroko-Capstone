@@ -1,7 +1,7 @@
 import mongoose, { model, models, Schema } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
-const URI = `mongodb+srv://Krokodil:${process.env.MONGODB_PASSWORD}@kroko.sd7bt9q.mongodb.net/bills?retryWrites=true&w=majority`;
+const URI = `mongodb+srv://Krokodil:${process.env.MONGODB_PASSWORD}@kroko.sd7bt9q.mongodb.net/test.bills?retryWrites=true&w=majority`;
 const billSchema = new Schema({
   title: String,
   amount: { type: Number },
