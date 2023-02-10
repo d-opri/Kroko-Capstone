@@ -4,13 +4,24 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 
+function fetcher(url) {
+  return fetch(url).then((response) => response.json());
+}
+
 export default function BillPageDetails() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data: bill, error, isLoading } = useSWR(`/api/bills/${id}`);
+  const { data: bill, error, isLoading } = useSWR(`/api/bills/${id}`, fetcher);
 
   if (isLoading || error) return <h2>Loading Bill..</h2>;
+
+  async function deleteBill() {
+    await fetch(`/api/bills/${id}`, {
+      method: "DELETE",
+    });
+    router.push("/");
+  }
 
   return (
     <BillDetails title={bill.title} amount={bill.amount}>
@@ -20,6 +31,10 @@ export default function BillPageDetails() {
           {participant.balance}.
         </li>
       ))}
+
+      <button type='button' onClick={deleteBill}>
+        Delete Bill
+      </button>
       <Button href={`/bills/${id}/edit`}>Edit Bill</Button>
       <Button href={"/"}>Back to Dashboard</Button>
     </BillDetails>
