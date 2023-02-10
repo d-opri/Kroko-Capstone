@@ -50,7 +50,10 @@ export default function BillForm({ addBill, bill, isEditPage }) {
       return {
         name: participant.name,
         paid: participant.paid,
-        balance: balance > 0 ? ` owes ${balance} $` : ` is owed ${-balance} $`,
+        balance:
+          balance > 0
+            ? ` owes ${balance} $`
+            : ` is owed ${(-balance).toFixed(2)} $`,
       };
     });
 
