@@ -2,11 +2,11 @@ import styled from "styled-components";
 import React from "react";
 import Link from "next/link";
 
-function Button({ onClick, children }) {
+export default function Button({ onClick, children }) {
   return <StyledButton onClick={onClick}>{children}</StyledButton>;
 }
 
-export { Button, GhostButton, GhostLinkButton, LinkButton };
+export { GhostButton, GhostLinkButton, LinkButton };
 
 const StyledButton = styled.button`
   width: 19.5rem;
