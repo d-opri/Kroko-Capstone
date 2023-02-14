@@ -3,6 +3,7 @@ import Head from "next/head";
 import { SWRConfig } from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Layout from "@/components/Layout";
 
 export default function App({ Component, pageProps }) {
   const [bill, setBill] = useState(null);
@@ -30,10 +31,12 @@ export default function App({ Component, pageProps }) {
       }}
     >
       <GlobalStyle />
-      <Head>
-        <title>Capstone Project</title>
-      </Head>
-      <Component {...pageProps} bill={bill} addBill={addBill} />
+      <Layout>
+        <Head>
+          <title>Capstone Project</title>
+        </Head>
+        <Component {...pageProps} bill={bill} addBill={addBill} />
+      </Layout>
     </SWRConfig>
   );
 }

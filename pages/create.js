@@ -18,25 +18,26 @@ export default function CreateBill({ bill }) {
 
   return (
     <>
-      <StyledLink href='/'>X</StyledLink>
+      <StyledLink href='/'> X </StyledLink>
       <Title>Create New Bill</Title>
-
       <BillForm isEditPage={false} bill={bill} onSubmit={addBill} />
     </>
   );
 }
 
 const StyledLink = styled(Link)`
-  color: black;
+  color: var(--clr-accent);
+  width: 2rem;
+  height: 2rem;
   font-size: large;
-  display: flex;
-  justify-content: end;
-  margin: 2em;
-  font-weight: 900;
+  position: absolute;
+  top: 4rem;
+  right: 1rem;
+  text-decoration: none;
 `;
 
 const Title = styled.h1`
   font-size: var(--fs-title);
   text-align: center;
-  padding-block: 5rem;
+  font-weight: 500;
 `;
