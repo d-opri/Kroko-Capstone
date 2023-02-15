@@ -22,7 +22,6 @@ const StyledLayout = styled.main`
 `;
 
 const StyledLogo = styled.h1`
-  align-self: center;
   font-weight: 500;
   background-color: var(--clr-primary);
   padding: 1rem;
