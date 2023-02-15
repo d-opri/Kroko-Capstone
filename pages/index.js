@@ -79,7 +79,7 @@ const BalanceContainer = styled(StyledSubtitle)`
   justify-content: center;
   align-items: center;
   padding: 1em;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem;
   background-color: var(--clr-accent);
 `;
 
