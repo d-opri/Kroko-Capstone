@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import { LinkButton, GhostButton } from "@/components/Button";
-import { StyledLabel } from "@/components/Typography.js";
+import { StyledLabel } from "@/components/Fonts.js";
 import Back from "@/assets/chevron_left.svg";
 import Link from "next/link";
 

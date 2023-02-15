@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledSubtitle } from "@/components/Typography.js";
+import { StyledSubtitle } from "@/components/Fonts.js";
 import Bill from "@/assets/bill.svg";
 
 function BillDetails({ title, amount, children }) {
