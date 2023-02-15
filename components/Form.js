@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import Button from "./Button";
-import { StyledCaption, StyledLabel } from "@/components/typography";
+import { StyledCaption, StyledLabel } from "@/components/Typography";
+import Delete from "@/assets/close_circle.svg";
 
 export default function BillForm({ onSubmit, bill, isEditPage }) {
   const [title, setTitle] = useState(bill ? bill.title : "");
@@ -144,7 +145,7 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
               type='button'
               onClick={() => handleDeleteParticipant(participant.id)}
             >
-              X
+              <Delete />
             </DeleteButton>
           </ListItem>
         ))}
@@ -206,19 +207,8 @@ const ListItem = styled.li`
 `;
 
 const DeleteButton = styled.button`
-  border-radius: 50%;
+  outline: none;
+  background: transparent;
+  border: transparent;
   color: var(--clr-accent);
-  font-weight: 600;
-  border: 2px solid var(--clr-accent);
-  padding: 0.2em;
-  background-color: var(--clr-primary);
-  position: relative;
-  top: 0.25rem;
-  right: 0.25rem;
-
-  &:hover {
-    background-color: var(--clr-accent);
-    border: 2px solid var(--clr-primary);
-    color: var(--clr-primary);
-  }
 `;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
-import { StyledSubHeading } from "@/components/typography";
+import { StyledSubHeading } from "@/components/Typography";
 
 export default function EditBillPage() {
   const router = useRouter();

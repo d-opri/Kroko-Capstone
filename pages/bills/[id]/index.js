@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import { LinkButton, GhostLinkButton, GhostButton } from "@/components/Button";
-import { StyledLabel } from "@/components/typography";
+import { StyledLabel } from "@/components/Typography";
+import Back from "@/assets/chevron_left.svg";
+import Link from "next/link";
 
 function fetcher(url) {
   return fetch(url).then((response) => response.json());
@@ -26,6 +28,9 @@ export default function BillPageDetails() {
 
   return (
     <Wrapper>
+      <Link href='/'>
+        <Back style={{ color: "var(--clr-accent)" }} />
+      </Link>
       <BillDetails title={bill.title} amount={bill.amount}>
         {bill.participants.map((participant, id) => (
           <ListItem key={id}>
@@ -43,7 +48,6 @@ export default function BillPageDetails() {
       <GhostButton type='button' onClick={deleteBill}>
         Delete Bill
       </GhostButton>
-      <GhostLinkButton href={"/"}>Back to Dashboard</GhostLinkButton>
       <LinkButton href={`/bills/${id}/edit`}>Edit Bill</LinkButton>
     </Wrapper>
   );
@@ -52,7 +56,7 @@ export default function BillPageDetails() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
 const ListItem = styled.li`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledSubtitle } from "@/components/typography";
+import { StyledSubtitle } from "@/components/Typography";
 
 function BillDetails({ title, amount, children }) {
   return (
@@ -24,6 +24,7 @@ const Container = styled.main`
   padding: 1rem;
   align-items: center;
   background-color: var(--clr-secondary);
+  margin-bottom: 1rem;
 `;
 
 export default BillDetails;

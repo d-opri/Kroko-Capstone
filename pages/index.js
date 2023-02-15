@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styled from "styled-components";
 import useSWR from "swr";
 import TabBar from "@/components/Navigation";
@@ -6,7 +5,7 @@ import {
   StyledSubtitle,
   StyledCaption,
   StyledLink,
-} from "@/components/typography";
+} from "@/components/Typography";
 
 export default function HomePage() {
   const { data: bill } = useSWR("api/bills");
