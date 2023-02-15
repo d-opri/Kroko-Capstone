@@ -29,6 +29,11 @@ const StyledLink = styled(Link)`
   font-size: var(--fs-link);
   color: var(--txt-link);
   text-decoration: none;
+
+  &:hover {
+    font-weight: 500;
+    letter-spacing: 0.03rem;
+  }
 `;
 
 const StyledLabel = styled.p`
