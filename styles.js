@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   :root {
-    --fs-title: 1.8392rem;
+    --fs-title: 1.5rem;
     --fs-subtitle: 1.2rem;
     --fs-caption: 1rem;
     --fs-link: .85rem;
