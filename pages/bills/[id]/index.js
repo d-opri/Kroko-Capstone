@@ -2,8 +2,8 @@ import BillDetails from "@/components/BillDetails";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
-import { LinkButton, GhostLinkButton, GhostButton } from "@/components/Button";
-import { StyledLabel } from "@/components/Typography";
+import { LinkButton, GhostButton } from "@/components/Button";
+import { StyledLabel } from "@/components/Typography.js";
 import Back from "@/assets/chevron_left.svg";
 import Link from "next/link";
 
@@ -28,9 +28,9 @@ export default function BillPageDetails() {
 
   return (
     <Wrapper>
-      <Link href='/'>
+      <StyledLink href='/'>
         <Back style={{ color: "var(--clr-accent)" }} />
-      </Link>
+      </StyledLink>
       <BillDetails title={bill.title} amount={bill.amount}>
         {bill.participants.map((participant, id) => (
           <ListItem key={id}>
@@ -70,4 +70,10 @@ const BalanceWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+`;
+
+const StyledLink = styled(Link)`
+  z-index: 2;
+  position: fixed;
+  top: 4rem;
 `;

@@ -5,7 +5,7 @@ import {
   StyledSubtitle,
   StyledCaption,
   StyledLink,
-} from "@/components/Typography";
+} from "@/components/Typography.js";
 
 export default function HomePage() {
   const { data: bill } = useSWR("api/bills");

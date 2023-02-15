@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import BillForm from "../components/Form";
 import styled from "styled-components";
 import Link from "next/link";
-import { StyledSubHeading } from "@/components/Typography";
+import { StyledSubHeading } from "@/components/Typography.js";
 import Back from "@/assets/chevron_left.svg";
 
 export default function CreateBill({ bill }) {

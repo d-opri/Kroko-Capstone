@@ -38,5 +38,4 @@ const TabBarContainer = styled.ul`
   padding: 0.7rem 0 0.5rem;
   border-radius: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 0.25rem 1.8rem 0.2rem rgba(56, 71, 189, 0.45);
 `;
