@@ -26,8 +26,8 @@ export default function BillPageDetails() {
   return (
     <Wrapper>
       <BillDetails title={bill.title} amount={bill.amount}>
-        {bill.participants.map((participant, index) => (
-          <ListItem key={index}>
+        {bill.participants.map((participant, id) => (
+          <ListItem key={id}>
             {participant.name}
             <ItemWrapper>
               {participant.balance}
