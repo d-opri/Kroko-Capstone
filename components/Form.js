@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
+import Button from "./Button";
 
 export default function BillForm({ onSubmit, bill, isEditPage }) {
   const [title, setTitle] = useState(bill ? bill.title : "");
@@ -63,96 +64,159 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
   }
 
   return (
-    <>
-      <StyledForm onSubmit={handleSubmit}>
-        <label aria-label='input to add participants' htmlFor='title'>
+    <Wrapper onSubmit={handleSubmit}>
+      <InputWrapper>
+        <Label aria-label='input to add participants' htmlFor='title'>
           Title
-          <input
-            type='text'
-            onChange={(event) => setTitle(event.target.value)}
-            value={title}
-            name='title'
-            id='title'
-            pattern='^\s*[a-zA-Z,\s]+\s*$'
-            maxLength={20}
-            minLength={2}
-            required
-          />
-        </label>
-
-        <label aria-label='amount' htmlFor='amount'>
+        </Label>
+        <Input
+          default
+          type='text'
+          onChange={(event) => setTitle(event.target.value)}
+          value={title}
+          name='title'
+          id='title'
+          pattern='^\s*[a-zA-Z,\s]+\s*$'
+          maxLength={20}
+          minLength={2}
+          required
+        />
+      </InputWrapper>
+      <InputWrapper>
+        <Label aria-label='amount' htmlFor='amount'>
           Amount
-          <input
-            type='number'
-            onChange={(event) => setAmount(event.target.value)}
-            value={amount}
-            name='amount'
-            placeholder='00.00'
-            id='amount'
-            pattern='/^[1-9]+$/'
-            max='1000000'
-            min='1'
-            required
-          />
-        </label>
-        <button type='button' onClick={handleAddParticipant}>
-          Add a participant
-        </button>
+        </Label>
+        <Input
+          type='number'
+          onChange={(event) => setAmount(event.target.value)}
+          value={amount}
+          name='amount'
+          placeholder='00.00'
+          id='amount'
+          pattern='/^[1-9]+$/'
+          max='1000000'
+          min='1'
+          required
+        />
+      </InputWrapper>
 
-        {participants.map((participant, index) => (
-          <li key={index}>
-            <label htmlFor={index}>
-              <input
-                type='text'
-                placeholder='Add Name'
-                id={index}
-                name='name'
-                value={participant.name}
-                pattern='^\s*[a-zA-Z,\s]+\s*$'
-                maxLength={20}
-                minLength={2}
-                onChange={(event) => handleParticipantChange(event, index)}
-                required
-              />
-            </label>
-            <label htmlFor={index}>
-              Paid:
-              <input
-                type='number'
-                id={index}
-                placeholder='00.00'
-                name='paid'
-                pattern='/^[0-9]+$/'
-                max='1000000'
-                min='0'
-                value={participant.paid}
-                onChange={(event) => handleParticipantChange(event, index)}
-                required
-              />
-            </label>
-            <button
-              type='button'
-              onClick={() => handleDeleteParticipant(participant.id)}
-            >
-              X
-            </button>
-          </li>
-        ))}
+      <Label>
+        Participants{" "}
+        <AddButton type='button' onClick={handleAddParticipant}>
+          ADD +
+        </AddButton>
+      </Label>
 
-        <button type='submit'>
-          {isEditPage ? "Save Changes" : "Save Bill"}
-        </button>
-      </StyledForm>
-    </>
+      {participants.map((participant, index) => (
+        <ListItem key={index}>
+          <InputWrapper>
+            <Label htmlFor={index}></Label>
+            <Input
+              type='text'
+              default
+              placeholder='Add Name'
+              id={index}
+              name='name'
+              value={participant.name}
+              pattern='^\s*[a-zA-Z,\s]+\s*$'
+              maxLength={20}
+              minLength={2}
+              onChange={(event) => handleParticipantChange(event, index)}
+              required
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Label htmlFor={index}></Label>
+            <Input
+              type='number'
+              id={index}
+              placeholder='00.00'
+              name='paid'
+              pattern='/^[0-9]+$/'
+              max='1000000'
+              min='0'
+              value={participant.paid}
+              onChange={(event) => handleParticipantChange(event, index)}
+              required
+            />
+          </InputWrapper>
+          <DeleteButton
+            type='button'
+            onClick={() => handleDeleteParticipant(participant.id)}
+          >
+            X
+          </DeleteButton>
+        </ListItem>
+      ))}
+
+      <Button type='submit'>{isEditPage ? "Save Changes" : "Save Bill"}</Button>
+    </Wrapper>
   );
 }
 
-const StyledForm = styled.form`
-  list-style: none;
-
+const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  margin-left: 2em;
-  margin-right: 2em;
+  align-content: space-between;
+  gap: 1rem;
+`;
+
+const InputWrapper = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
+
+const Input = styled.input`
+  width: ${(props) => (props.default ? "100%" : "6.5rem")};
+  height: 3rem;
+  font-size: var(--fs-caption);
+  border-radius: 1em;
+  border: 1px solid var(--clr-accent);
+  padding: 1em 0.7em;
+  &:focus {
+    border: 1.1px solid var(--clr-accent);
+  }
+`;
+
+const Label = styled.h3`
+  font-size: var(--fs-label);
+  color: var(--clr-accent);
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+const AddButton = styled.button`
+  border-radius: 1.5em;
+  padding: 0.5em 1em;
+  background-color: var(--clr-primary);
+  border: 2px solid var(--clr-accent);
+  text-align: center;
+  font-size: var(--fs-label);
+  color: var(--clr-accent);
+  font-weight: 600;
+  height: 2.1rem;
+
+  &:hover {
+    background-color: rgba(56, 71, 189, 0.1);
+  }
+`;
+
+const ListItem = styled.li`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+`;
+
+const DeleteButton = styled.button`
+  border-radius: 50%;
+  color: var(--clr-accent);
+  font-weight: 600;
+  border: 2px solid var(--clr-accent);
+  padding: 0.2em;
+  background-color: var(--clr-primary);
+  position: fixed;
+  right: 1.5rem;
 `;

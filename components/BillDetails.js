@@ -4,31 +4,32 @@ function BillDetails({ title, amount, children }) {
   return (
     <Container>
       <Title>{title}</Title>
-      <Title>Total: {amount} $</Title>
-      <Title>Participants</Title>
+      <Title>Total {amount} $</Title>
       <List>{children}</List>
     </Container>
   );
 }
 
 const Title = styled.h2`
-  font-size: var(--fs-caption);
+  font-size: var(--fs-subtitle);
+  font-weight: 500;
 `;
 
-const List = styled.div`
-  font-size: var(--fs-caption);
-  list-style: none;
-  text-align: center;
-  margin-bottom: 1em;
+const List = styled.ul`
+  margin-top: 1.5rem;
+
+  width: 100%;
 `;
 
 const Container = styled.main`
+  border-radius: 1.5625em;
   display: flex;
+  gap: 1rem;
   flex-direction: column;
+  padding: 1rem;
   align-items: center;
-  border-radius: 2em;
-  border: 2px solid black;
-  margin: 2em;
+  background-color: var(--clr-secondary);
+  margin-bottom: 3rem;
 `;
 
 export default BillDetails;
