@@ -24,9 +24,10 @@ const Backround = styled.nav`
   width: 100%;
   position: fixed;
   bottom: 0;
-  padding: 1.5rem 1.8rem 2rem;
+  padding: 1rem 2rem 2rem;
   left: 0;
-  height: 5.1rem;
+  height: 4.1rem;
+  box-shadow: 0 -1rem 1rem var(--clr-primary);
 `;
 
 const TabBarContainer = styled.ul`

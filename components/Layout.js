@@ -1,10 +1,13 @@
 import styled from "styled-components";
+import Logo from "@/assets/planet.svg";
 
 const Layout = ({ children }) => {
   return (
     <>
       <StyledLayout>
-        <StyledLogo>ø</StyledLogo>
+        <StyledBanner>
+          <Logo style={{ color: "var(--clr-accent)" }} />
+        </StyledBanner>
 
         {children}
       </StyledLayout>
@@ -21,7 +24,7 @@ const StyledLayout = styled.main`
   gap: 1rem;
 `;
 
-const StyledLogo = styled.h1`
+const StyledBanner = styled.h1`
   font-weight: 500;
   background-color: var(--clr-primary);
   padding: 1rem;
@@ -31,4 +34,5 @@ const StyledLogo = styled.h1`
   position: fixed;
   top: 0;
   left: 0;
+  box-shadow: 0 1rem 1rem var(--clr-primary);
 `;
