@@ -7,7 +7,7 @@ import Delete from "@/assets/close_circle.svg";
 
 export default function BillForm({ onSubmit, bill, isEditPage }) {
   const [title, setTitle] = useState(bill ? bill.title : "");
-  const [amount, setAmount] = useState(bill ? bill.amount : "");
+  const [amount, setAmount] = useState(bill ? bill.amount : 0);
   const [participants, setParticipants] = useState(
     bill
       ? bill.participants
@@ -134,7 +134,6 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
                 min='0'
                 value={participant.paid}
                 onChange={(event) => handleParticipantChange(event, index)}
-                required
               />
             </InputWrapper>
             <DeleteButton

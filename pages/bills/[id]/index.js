@@ -42,7 +42,9 @@ export default function BillPageDetails() {
                 ? `is owed ${-participant.balance} $`
                 : "has no balance"}
               <br />
-              <BalanceWrapper>paid {participant.paid} $</BalanceWrapper>
+              <BalanceWrapper>
+                paid {participant.paid ? `${participant.paid}` : `0`} $
+              </BalanceWrapper>
             </ItemWrapper>
           </ListItem>
         ))}
