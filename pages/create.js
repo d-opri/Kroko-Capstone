@@ -32,12 +32,15 @@ const StyledLink = styled(Link)`
   font-size: large;
   position: absolute;
   top: 4rem;
-  right: 1rem;
+  left: 2rem;
   text-decoration: none;
+
+  &:hover {
+    font-weight: 600;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: var(--fs-title);
+  font-size: var(--fs-subtitle);
   text-align: center;
-  font-weight: 500;
 `;

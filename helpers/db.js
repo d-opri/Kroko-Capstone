@@ -11,7 +11,7 @@ const billSchema = new Schema({
       id: String,
       name: String,
       paid: { type: Number },
-      balance: String,
+      balance: { type: Number },
     },
   ],
 });

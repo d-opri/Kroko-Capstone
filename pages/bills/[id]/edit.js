@@ -29,15 +29,19 @@ export default function EditBillPage() {
   );
 }
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)`
   color: var(--clr-accent);
   width: 2rem;
   height: 2rem;
   font-size: large;
   position: absolute;
   top: 4rem;
-  right: 1rem;
+  left: 2rem;
   text-decoration: none;
+
+  &:hover {
+    font-weight: 600;
+  }
 `;
 
 const Title = styled.h1`
