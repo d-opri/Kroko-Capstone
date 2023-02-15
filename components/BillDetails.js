@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { StyledSubtitle } from "@/components/Fonts.js";
-import Bill from "@/assets/bill.svg";
 
 function BillDetails({ title, amount, children }) {
   return (
@@ -9,7 +8,7 @@ function BillDetails({ title, amount, children }) {
         <StyledSubtitle>{title}</StyledSubtitle>
         <List>{children}</List>
       </Container>
-      <BillContainer />
+
       <StyledAmount>Total {amount} $</StyledAmount>
     </>
   );
@@ -23,18 +22,12 @@ const List = styled.ul`
 const Container = styled.div`
   margin-top: 3rem;
   align-items: center;
+  background-color: var(--clr-secondary);
   display: flex;
   gap: 1rem;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   flex-direction: column;
   border-radius: 1.5625em;
-`;
-
-const BillContainer = styled(Bill)`
-  z-index: -1;
-  height: auto;
-  position: absolute;
-  width: 100%;
 `;
 
 const StyledAmount = styled(StyledSubtitle)`
