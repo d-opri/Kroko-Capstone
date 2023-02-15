@@ -2,7 +2,7 @@ import BillDetails from "@/components/BillDetails";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
-import { LinkButton, GhostButton } from "@/components/Button";
+import { LinkButton, GhostButton, GhostLinkButton } from "@/components/Button";
 
 import Back from "@/assets/chevron_left.svg";
 import Link from "next/link";
@@ -28,7 +28,7 @@ export default function BillPageDetails() {
 
   return (
     <Wrapper>
-      <StyledLink href='/'>
+      <StyledLink href='/create'>
         <Back style={{ color: "var(--clr-accent)" }} />
       </StyledLink>
       <BillDetails title={bill.title} amount={bill.amount}>
@@ -52,7 +52,8 @@ export default function BillPageDetails() {
       <GhostButton type='button' onClick={deleteBill}>
         Delete Bill
       </GhostButton>
-      <LinkButton href={`/bills/${id}/edit`}>Edit Bill</LinkButton>
+      <GhostLinkButton href={`/bills/${id}/edit`}>Edit Bill</GhostLinkButton>
+      <LinkButton href={`/`}>Back to Dashboard</LinkButton>
     </Wrapper>
   );
 }
@@ -60,7 +61,7 @@ export default function BillPageDetails() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.7rem;
 `;
 
 const ListItem = styled.li`

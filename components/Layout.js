@@ -20,7 +20,7 @@ export default Layout;
 const StyledLayout = styled.main`
   display: flex;
   flex-direction: column;
-  margin: 5rem 2rem;
+  margin: 4rem 2rem;
   gap: 1rem;
 `;
 

@@ -24,15 +24,20 @@ export default function HomePage() {
       <StyledSubtitle>Recent Activity</StyledSubtitle>
       {bill && (
         <ListWrapper>
-          {bill.map((item) => (
-            <ItemLayout key={item.id}>
-              <TitleWrapper>
-                <StyledCaption>{item.title}</StyledCaption>
-                <StyledLink href={`/bills/${item.id}`}>View Details</StyledLink>
-              </TitleWrapper>
-              <StyledCaption>{item.amount} $</StyledCaption>
-            </ItemLayout>
-          ))}
+          {bill
+            .slice()
+            .reverse()
+            .map((item) => (
+              <ItemLayout key={item.id}>
+                <TitleWrapper>
+                  <StyledCaption>{item.title}</StyledCaption>
+                  <StyledLink href={`/bills/${item.id}`}>
+                    View Details
+                  </StyledLink>
+                </TitleWrapper>
+                <StyledCaption>{item.amount} $</StyledCaption>
+              </ItemLayout>
+            ))}
         </ListWrapper>
       )}
       <TabBar />
