@@ -1,35 +1,37 @@
 import styled from "styled-components";
+import { StyledSubtitle } from "@/components/Fonts.js";
 
 function BillDetails({ title, amount, children }) {
   return (
-    <Container>
-      <Title>{title}</Title>
-      <Title>Total {amount} $</Title>
-      <List>{children}</List>
-    </Container>
+    <>
+      <Container>
+        <StyledSubtitle>{title}</StyledSubtitle>
+        <List>{children}</List>
+      </Container>
+
+      <StyledAmount>Total {amount} $</StyledAmount>
+    </>
   );
 }
 
-const Title = styled.h2`
-  font-size: var(--fs-subtitle);
-  font-weight: 500;
-`;
-
 const List = styled.ul`
-  margin-top: 1.5rem;
-
+  margin-top: 1rem;
   width: 100%;
 `;
 
-const Container = styled.main`
-  border-radius: 1.5625em;
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  padding: 1rem;
+const Container = styled.div`
+  margin-top: 3rem;
   align-items: center;
   background-color: var(--clr-secondary);
-  margin-bottom: 3rem;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  flex-direction: column;
+  border-radius: 1.5625em;
 `;
 
+const StyledAmount = styled(StyledSubtitle)`
+  text-align: center;
+  padding-top: 5rem;
+`;
 export default BillDetails;

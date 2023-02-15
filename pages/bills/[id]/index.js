@@ -2,7 +2,10 @@ import BillDetails from "@/components/BillDetails";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
-import { LinkButton, GhostLinkButton, GhostButton } from "@/components/Button";
+import { LinkButton, GhostButton } from "@/components/Button";
+import { StyledLabel } from "@/components/Fonts.js";
+import Back from "@/assets/chevron_left.svg";
+import Link from "next/link";
 
 function fetcher(url) {
   return fetch(url).then((response) => response.json());
@@ -25,22 +28,26 @@ export default function BillPageDetails() {
 
   return (
     <Wrapper>
+      <StyledLink href='/'>
+        <Back style={{ color: "var(--clr-accent)" }} />
+      </StyledLink>
       <BillDetails title={bill.title} amount={bill.amount}>
         {bill.participants.map((participant, id) => (
           <ListItem key={id}>
             {participant.name}
-            <ItemWrapper>
+            <BalanceWrapper>
               {participant.balance}
               <br />
-              <Paid>paid {participant.paid} $</Paid>
-            </ItemWrapper>
+              <StyledLabel color='var(--txt-secondary)'>
+                paid {participant.paid} $
+              </StyledLabel>
+            </BalanceWrapper>
           </ListItem>
         ))}
       </BillDetails>
       <GhostButton type='button' onClick={deleteBill}>
         Delete Bill
       </GhostButton>
-      <GhostLinkButton href={"/"}>Back to Dashboard</GhostLinkButton>
       <LinkButton href={`/bills/${id}/edit`}>Edit Bill</LinkButton>
     </Wrapper>
   );
@@ -58,14 +65,15 @@ const ListItem = styled.li`
   margin-bottom: 1rem;
 `;
 
-const ItemWrapper = styled.div`
+const BalanceWrapper = styled.div`
   text-align: right;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 `;
 
-const Paid = styled.p`
-  color: var(--secondary-txt);
-  font-size: var(--fs-label);
+const StyledLink = styled(Link)`
+  z-index: 2;
+  position: fixed;
+  top: 4rem;
 `;

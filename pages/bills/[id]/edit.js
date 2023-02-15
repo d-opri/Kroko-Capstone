@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
+import { StyledSubHeading } from "@/components/Fonts.js";
 
 export default function EditBillPage() {
   const router = useRouter();
@@ -22,14 +23,14 @@ export default function EditBillPage() {
 
   return (
     <>
-      <StyledLink href={`/bills/${id}`}>X</StyledLink>
-      <Title>Edit Bill</Title>
+      <StyledLinkIcon href={`/bills/${id}`}>X</StyledLinkIcon>
+      <StyledSubHeading>Edit Bill</StyledSubHeading>
       <BillForm isEditPage={true} onSubmit={editBill} bill={bill} />
     </>
   );
 }
 
-export const StyledLink = styled(Link)`
+export const StyledLinkIcon = styled(Link)`
   color: var(--clr-accent);
   width: 2rem;
   height: 2rem;
@@ -42,10 +43,4 @@ export const StyledLink = styled(Link)`
   &:hover {
     font-weight: 600;
   }
-`;
-
-const Title = styled.h1`
-  font-size: var(--fs-title);
-  text-align: center;
-  font-weight: 500;
 `;

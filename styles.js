@@ -2,9 +2,10 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   :root {
-    --fs-title: 1.8392rem;
+    --fs-title: 1.5rem;
     --fs-subtitle: 1.2rem;
     --fs-caption: 1rem;
+    --fs-link: .85rem;
     --fs-label: .85rem;
 
     
@@ -12,8 +13,10 @@ export default createGlobalStyle`
     --clr-secondary: rgba(255, 255, 255, 1);
     --clr-accent: rgba(56, 71, 189, 1);
     
-    --secondary-txt: rgba(51, 64, 79, 1);
-    --clr-link: rgba(56, 71, 189, 1);
+
+    --txt-primary: rgba(51, 64, 79, 1);
+    --txt-secondary: rgba(51, 64, 79, 1);
+    --txt-link: rgba(56, 71, 189, 1);
     --negative-balance: rgba(235, 93, 86, 1);
     --positive-balance: rgba(75, 212, 175, 1);
 
@@ -31,7 +34,7 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: system-ui;
+    font-family: 'Poppins', sans-serif;
     background-color: var(--clr-primary);
     font-size: 1rem;
   
