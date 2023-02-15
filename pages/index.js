@@ -39,16 +39,17 @@ const Wrapper = styled.div`
 const ListWrapper = styled.ol`
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
   gap: 2.5em;
 `;
 
 const ItemLayout = styled.li`
   display: flex;
   justify-content: space-between;
+  margin-left: 1rem;
 `;
 
-const TitleWrapper = styled.div`
+const TitleWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 `;

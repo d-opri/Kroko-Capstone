@@ -27,7 +27,6 @@ const StyledCaption = styled.p`
 
 const StyledLink = styled(Link)`
   font-size: var(--fs-link);
-
   color: var(--txt-link);
   text-decoration: none;
 `;
@@ -35,7 +34,7 @@ const StyledLink = styled(Link)`
 const StyledLabel = styled.p`
   font-size: var(--fs-label);
   font-weight: 400;
-  color: var(--clr-accent);
+  color: ${(props) => props.color || "var(--clr-accent)"};
 `;
 
 export {

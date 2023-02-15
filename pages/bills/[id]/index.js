@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import { LinkButton, GhostLinkButton, GhostButton } from "@/components/Button";
+import { StyledLabel } from "@/components/typography";
 
 function fetcher(url) {
   return fetch(url).then((response) => response.json());
@@ -29,11 +30,13 @@ export default function BillPageDetails() {
         {bill.participants.map((participant, id) => (
           <ListItem key={id}>
             {participant.name}
-            <ItemWrapper>
+            <BalanceWrapper>
               {participant.balance}
               <br />
-              <Paid>paid {participant.paid} $</Paid>
-            </ItemWrapper>
+              <StyledLabel color='var(--txt-secondary)'>
+                paid {participant.paid} $
+              </StyledLabel>
+            </BalanceWrapper>
           </ListItem>
         ))}
       </BillDetails>
@@ -49,7 +52,7 @@ export default function BillPageDetails() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
 const ListItem = styled.li`
@@ -58,14 +61,9 @@ const ListItem = styled.li`
   margin-bottom: 1rem;
 `;
 
-const ItemWrapper = styled.div`
+const BalanceWrapper = styled.div`
   text-align: right;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-`;
-
-const Paid = styled.p`
-  color: var(--secondary-txt);
-  font-size: var(--fs-label);
 `;

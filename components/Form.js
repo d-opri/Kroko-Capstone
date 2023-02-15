@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import Button from "./Button";
+import { StyledCaption, StyledLabel } from "@/components/typography";
 
 export default function BillForm({ onSubmit, bill, isEditPage }) {
   const [title, setTitle] = useState(bill ? bill.title : "");
@@ -66,9 +67,9 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
   return (
     <Wrapper onSubmit={handleSubmit}>
       <InputWrapper>
-        <Label aria-label='input to add participants' htmlFor='title'>
+        <StyledLabel aria-label='title' htmlFor='title'>
           Title
-        </Label>
+        </StyledLabel>
         <Input
           default
           type='text'
@@ -83,9 +84,9 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
         />
       </InputWrapper>
       <InputWrapper>
-        <Label aria-label='amount' htmlFor='amount'>
+        <StyledLabel aria-label='amount' htmlFor='amount'>
           Amount
-        </Label>
+        </StyledLabel>
         <Input
           type='number'
           onChange={(event) => setAmount(event.target.value)}
@@ -100,55 +101,54 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
         />
       </InputWrapper>
 
-      <Label>
-        Participants{" "}
-        <AddButton type='button' onClick={handleAddParticipant}>
-          ADD +
-        </AddButton>
-      </Label>
+      <AddButton type='button' onClick={handleAddParticipant}>
+        ADD +
+      </AddButton>
+      <InputWrapper>
+        <StyledLabel>Participants </StyledLabel>
 
-      {participants.map((participant, index) => (
-        <ListItem key={index}>
-          <InputWrapper>
-            <Label htmlFor={index}></Label>
-            <Input
-              type='text'
-              default
-              placeholder='Add Name'
-              id={index}
-              name='name'
-              value={participant.name}
-              pattern='^\s*[a-zA-Z,\s]+\s*$'
-              maxLength={20}
-              minLength={2}
-              onChange={(event) => handleParticipantChange(event, index)}
-              required
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <Label htmlFor={index}></Label>
-            <Input
-              type='number'
-              id={index}
-              placeholder='00.00'
-              name='paid'
-              pattern='/^[0-9]+$/'
-              max='1000000'
-              min='0'
-              value={participant.paid}
-              onChange={(event) => handleParticipantChange(event, index)}
-              required
-            />
-          </InputWrapper>
-          <DeleteButton
-            type='button'
-            onClick={() => handleDeleteParticipant(participant.id)}
-          >
-            X
-          </DeleteButton>
-        </ListItem>
-      ))}
-
+        {participants.map((participant, index) => (
+          <ListItem key={index}>
+            <InputWrapper>
+              <StyledLabel htmlFor={index}></StyledLabel>
+              <Input
+                type='text'
+                default
+                placeholder='Add Name'
+                id={index}
+                name='name'
+                value={participant.name}
+                pattern='^\s*[a-zA-Z,\s]+\s*$'
+                maxLength={20}
+                minLength={2}
+                onChange={(event) => handleParticipantChange(event, index)}
+                required
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <StyledLabel htmlFor={index}></StyledLabel>
+              <Input
+                type='number'
+                id={index}
+                placeholder='00.00'
+                name='paid'
+                pattern='/^[0-9]+$/'
+                max='1000000'
+                min='0'
+                value={participant.paid}
+                onChange={(event) => handleParticipantChange(event, index)}
+                required
+              />
+            </InputWrapper>
+            <DeleteButton
+              type='button'
+              onClick={() => handleDeleteParticipant(participant.id)}
+            >
+              X
+            </DeleteButton>
+          </ListItem>
+        ))}
+      </InputWrapper>
       <Button type='submit'>{isEditPage ? "Save Changes" : "Save Bill"}</Button>
     </Wrapper>
   );
@@ -157,8 +157,7 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
 const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
-  align-content: space-between;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
 const InputWrapper = styled.label`
@@ -170,7 +169,7 @@ const InputWrapper = styled.label`
 const Input = styled.input`
   width: ${(props) => (props.default ? "100%" : "6.5rem")};
   height: 3rem;
-  font-size: var(--fs-caption);
+  font-size: ${StyledCaption};
   border-radius: 1em;
   border: 1px solid var(--clr-accent);
   padding: 1em 0.7em;
@@ -179,28 +178,24 @@ const Input = styled.input`
   }
 `;
 
-const Label = styled.h3`
-  font-size: var(--fs-label);
-  color: var(--clr-accent);
-  font-weight: 500;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-
 const AddButton = styled.button`
+  display: flex;
+  align-self: flex-end;
   border-radius: 1.5em;
-  padding: 0.5em 1em;
+  padding: 0.25em 0.5em;
   background-color: var(--clr-primary);
   border: 2px solid var(--clr-accent);
-  text-align: center;
-  font-size: var(--fs-label);
+  width: fit-content;
+  font-size: var(--txt-label);
+  font-weight: 500;
   color: var(--clr-accent);
-  font-weight: 600;
-  height: 2.1rem;
+  height: fit-content;
+  margin-bottom: -1.5rem;
 
   &:hover {
-    background-color: rgba(56, 71, 189, 0.1);
+    background-color: var(--clr-accent);
+    border: 2px solid var(--clr-primary);
+    color: var(--clr-primary);
   }
 `;
 
@@ -217,6 +212,13 @@ const DeleteButton = styled.button`
   border: 2px solid var(--clr-accent);
   padding: 0.2em;
   background-color: var(--clr-primary);
-  position: fixed;
-  right: 1.5rem;
+  position: relative;
+  top: 0.25rem;
+  right: 0.25rem;
+
+  &:hover {
+    background-color: var(--clr-accent);
+    border: 2px solid var(--clr-primary);
+    color: var(--clr-primary);
+  }
 `;

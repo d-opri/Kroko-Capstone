@@ -4,7 +4,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <StyledLayout>
-        <Header>ø</Header>
+        <StyledLogo>ø</StyledLogo>
 
         {children}
       </StyledLayout>
@@ -17,12 +17,11 @@ export default Layout;
 const StyledLayout = styled.main`
   display: flex;
   flex-direction: column;
-  margin: 2rem;
-  margin-top: 4rem;
+  margin: 6rem 2rem;
   gap: 1rem;
 `;
 
-const Header = styled.h1`
+const StyledLogo = styled.h1`
   align-self: center;
   font-weight: 500;
   background-color: var(--clr-primary);

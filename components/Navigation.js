@@ -4,8 +4,8 @@ import styled from "styled-components";
 const TabBar = () => (
   <Backround>
     <TabBarContainer>
-      <TabButton href='/'>Home</TabButton>
-      <TabButton href='/create'>Add Bill</TabButton>
+      <TabIcon href='/create'>Add </TabIcon>
+      <TabIcon href='/'>Home</TabIcon>
     </TabBarContainer>
   </Backround>
 );
@@ -17,9 +17,10 @@ const Backround = styled.nav`
   width: 100%;
   position: fixed;
   align-self: center;
+  display: flex;
+  justify-content: space-around;
   bottom: 0;
   height: 5.1rem;
-  padding: 1.5rem 1.8rem 2rem;
 `;
 
 const TabBarContainer = styled.ul`
@@ -28,11 +29,11 @@ const TabBarContainer = styled.ul`
   align-items: center;
   gap: 5.5rem;
 `;
-
-const TabButton = styled(Link)`
+const TabIcon = styled(Link)`
   text-decoration: none;
   width: 2rem;
   height: 2rem;
+  background-color: green;
   color: var(--clr-accent);
   font-weight: 700;
 `;

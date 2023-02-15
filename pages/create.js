@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import BillForm from "../components/Form";
 import styled from "styled-components";
 import Link from "next/link";
+import { StyledSubHeading } from "@/components/typography";
 
 export default function CreateBill({ bill }) {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function CreateBill({ bill }) {
   return (
     <>
       <StyledLink href='/'> X </StyledLink>
-      <Title>Create New Bill</Title>
+      <StyledSubHeading>Create New Bill</StyledSubHeading>
       <BillForm isEditPage={false} bill={bill} onSubmit={addBill} />
     </>
   );
@@ -38,9 +39,4 @@ const StyledLink = styled(Link)`
   &:hover {
     font-weight: 600;
   }
-`;
-
-const Title = styled.h1`
-  font-size: var(--fs-subtitle);
-  text-align: center;
 `;
