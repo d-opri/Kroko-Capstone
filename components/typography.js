@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 const StyledHeading = styled.h1`
   font-size: var(--fs-title);
@@ -18,23 +19,20 @@ const StyledSubtitle = styled.h3`
   color: var(--txt-primary);
 `;
 
-const Caption = styled.p`
+const StyledCaption = styled.p`
   font-size: var(--fs-caption);
   font-weight: 500;
   color: ${(props) => props.color || "var(--txt-primary)"};
 `;
 
-const Body = styled(Caption)`
-  font-weight: 400;
-`;
-
-const Link = styled(Link)`
+const StyledLink = styled(Link)`
   font-size: var(--fs-link);
-  font-weight: 300;
+
   color: var(--txt-link);
+  text-decoration: none;
 `;
 
-const Label = styled.p`
+const StyledLabel = styled.p`
   font-size: var(--fs-label);
   font-weight: 400;
   color: var(--clr-accent);
@@ -44,8 +42,7 @@ export {
   StyledHeading,
   StyledSubHeading,
   StyledSubtitle,
-  Caption,
-  Body,
-  Label,
-  Link,
+  StyledCaption,
+  StyledLabel,
+  StyledLink,
 };
