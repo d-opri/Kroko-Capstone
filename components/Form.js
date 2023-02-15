@@ -53,10 +53,7 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
       return {
         name: participant.name,
         paid: participant.paid,
-        balance:
-          balance > 0
-            ? ` owes ${balance} $`
-            : ` is owed ${(-balance).toFixed(2)} $`,
+        balance: Number(balance),
       };
     });
 
@@ -101,7 +98,6 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
           required
         />
       </InputWrapper>
-
       <AddButton type='button' onClick={handleAddParticipant}>
         ADD +
       </AddButton>
@@ -150,6 +146,7 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
           </ListItem>
         ))}
       </InputWrapper>
+
       <Button type='submit'>{isEditPage ? "Save Changes" : "Save Bill"}</Button>
     </Wrapper>
   );
@@ -158,7 +155,7 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
 const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
 `;
 
 const InputWrapper = styled.label`
@@ -170,12 +167,13 @@ const InputWrapper = styled.label`
 const Input = styled.input`
   width: ${(props) => (props.default ? "100%" : "6.5rem")};
   height: 3rem;
-  font-size: ${StyledCaption};
   border-radius: 1em;
+  background-color: rgba(235, 237, 242, 1);
   border: 1px solid var(--clr-accent);
   padding: 1em 0.7em;
   &:focus {
-    border: 1.1px solid var(--clr-accent);
+    outline: none;
+    box-shadow: 0 0 0 1.7px var(--clr-accent);
   }
 `;
 
@@ -188,7 +186,7 @@ const AddButton = styled.button`
   border: 2px solid var(--clr-accent);
   width: fit-content;
   font-size: var(--txt-label);
-  font-weight: 500;
+  font-weight: 300;
   color: var(--clr-accent);
   height: fit-content;
   margin-bottom: -1.5rem;

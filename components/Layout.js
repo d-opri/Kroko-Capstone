@@ -20,7 +20,7 @@ export default Layout;
 const StyledLayout = styled.main`
   display: flex;
   flex-direction: column;
-  margin: 6rem 2rem;
+  margin: 5rem 2rem;
   gap: 1rem;
 `;
 
@@ -34,5 +34,4 @@ const StyledBanner = styled.h1`
   position: fixed;
   top: 0;
   left: 0;
-  box-shadow: 0 1rem 1rem var(--clr-primary);
 `;

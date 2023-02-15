@@ -6,7 +6,7 @@ export default function Button({ onClick, children }) {
   return <StyledButton onClick={onClick}>{children}</StyledButton>;
 }
 
-export { GhostButton, GhostLinkButton, LinkButton };
+export { GhostButton, GhostLinkButton, LinkButton, StyledButton };
 
 const StyledButton = styled.button`
   width: 19.5rem;
@@ -14,7 +14,7 @@ const StyledButton = styled.button`
   border-radius: 2em;
   border: none;
   padding: 0.75rem 1rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   align-self: center;
@@ -24,7 +24,7 @@ const StyledButton = styled.button`
   font-size: var(--fs-caption);
 
   &:hover {
-    background-color: rgba(45, 57, 151, 1);
+    background-color: rgba(233, 150, 209, 1);
     font-weight: 600;
   }
 `;
@@ -57,7 +57,7 @@ const LinkButton = styled(Link)`
   font-size: var(--fs-caption);
 
   &:hover {
-    background-color: rgba(45, 57, 151, 1);
+    background-color: rgba(233, 150, 209, 1);
     font-weight: 600;
   }
 `;

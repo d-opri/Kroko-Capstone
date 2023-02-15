@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import { LinkButton, GhostButton } from "@/components/Button";
-import { StyledLabel } from "@/components/Fonts.js";
+
 import Back from "@/assets/chevron_left.svg";
 import Link from "next/link";
 
@@ -35,13 +35,15 @@ export default function BillPageDetails() {
         {bill.participants.map((participant, id) => (
           <ListItem key={id}>
             {participant.name}
-            <BalanceWrapper>
-              {participant.balance}
+            <ItemWrapper>
+              {participant.balance > 0
+                ? `owes ${participant.balance} $`
+                : participant.balance < 0
+                ? `is owed ${-participant.balance} $`
+                : "has no balance"}
               <br />
-              <StyledLabel color='var(--txt-secondary)'>
-                paid {participant.paid} $
-              </StyledLabel>
-            </BalanceWrapper>
+              <BalanceWrapper>paid {participant.paid} $</BalanceWrapper>
+            </ItemWrapper>
           </ListItem>
         ))}
       </BillDetails>
@@ -62,12 +64,21 @@ const Wrapper = styled.div`
 const ListItem = styled.li`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+`;
+
+const ItemWrapper = styled.div`
+  text-align: right;
+  display: flex;
+  font-weight: 400;
+  flex-direction: column;
+  gap: 0.25rem;
 `;
 
 const BalanceWrapper = styled.div`
   text-align: right;
   display: flex;
+  font-weight: 300;
   flex-direction: column;
   gap: 0.25rem;
 `;
