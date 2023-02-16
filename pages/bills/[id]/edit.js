@@ -17,7 +17,8 @@ export default function EditBillPage() {
       method: "PATCH",
       body: JSON.stringify(bill),
     });
-    router.push("/");
+
+    router.push(`/bills/${id}`);
   }
   if (!isReady || isLoading || error) return <h2>Loading Bill..</h2>;
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import Button from "./Button";
-import { StyledCaption, StyledLabel } from "@/components/Fonts.js";
+import { StyledLabel } from "@/components/Fonts.js";
 import Delete from "@/assets/close_circle.svg";
 
 export default function BillForm({ onSubmit, bill, isEditPage }) {
@@ -63,7 +63,7 @@ export default function BillForm({ onSubmit, bill, isEditPage }) {
   }
 
   return (
-    <Wrapper onSubmit={handleSubmit}>
+    <Wrapper autocomplete='off' onSubmit={handleSubmit}>
       <InputWrapper>
         <StyledLabel aria-label='title' htmlFor='title'>
           Title
