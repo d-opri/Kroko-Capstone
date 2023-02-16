@@ -6,8 +6,6 @@ import {
   StyledSubHeading,
   StyledCaption,
   StyledLink,
-  StyledLabel,
-  StyledHeading,
 } from "@/components/Fonts.js";
 
 export default function HomePage() {
@@ -18,7 +16,8 @@ export default function HomePage() {
   return (
     <Wrapper>
       <BalanceContainer>
-        Your Balance <StyledTitle>{totalBalance || 0} $</StyledTitle>
+        <StyledTitle> Your Balance </StyledTitle>{" "}
+        <StyledBalance>{totalBalance || 0} $</StyledBalance>
       </BalanceContainer>
 
       <StyledSubtitle>Recent Activity</StyledSubtitle>
@@ -69,10 +68,9 @@ const TitleWrapper = styled.div`
   flex-direction: column;
 `;
 
-const BalanceContainer = styled(StyledSubtitle)`
+const BalanceContainer = styled.div`
   display: flex;
-  color: var(--clr-primary);
-  font-weight: 300;
+
   flex-direction: column;
   border-radius: 1.875em;
   height: 11rem;
@@ -84,6 +82,11 @@ const BalanceContainer = styled(StyledSubtitle)`
 `;
 
 const StyledTitle = styled(StyledSubHeading)`
+  color: var(--clr-primary);
+  font-weight: 300;
+`;
+
+const StyledBalance = styled(StyledSubHeading)`
   font-size: 2.25rem;
   font-weight: 500;
   letter-spacing: 0.05rem;

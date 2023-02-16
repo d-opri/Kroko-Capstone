@@ -37,7 +37,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const StyledLabel = styled.p`
+const StyledLabel = styled.label`
   font-size: var(--fs-label);
   font-weight: 400;
   color: ${(props) => props.color || "var(--clr-accent)"};
