@@ -9,14 +9,14 @@ export default createGlobalStyle`
     --fs-label: .85rem;
 
     
-    --clr-primary: rgba(244, 246, 252, 1);
-    --clr-secondary: rgba(255, 255, 255, 1);
-    --clr-accent: rgba(56, 71, 189, 1);
+    --clr-primary: rgba(23, 22, 27, 1);
+    --clr-secondary: rgba(31, 31, 35, 1);
+    --clr-accent: rgba(244, 195, 230, 1);
     
 
-    --txt-primary: rgba(51, 64, 79, 1);
+    --txt-primary: rgba(244, 246, 252, 1);
     --txt-secondary: rgba(51, 64, 79, 1);
-    --txt-link: rgba(56, 71, 189, 1);
+    --txt-link: rgba(194, 222, 246, 1);
     --negative-balance: rgba(235, 93, 86, 1);
     --positive-balance: rgba(75, 212, 175, 1);
 
@@ -37,6 +37,7 @@ export default createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     background-color: var(--clr-primary);
     font-size: 1rem;
+  
   
   }
 `;

@@ -1,15 +1,20 @@
 import styled from "styled-components";
-import { StyledSubtitle } from "@/components/Fonts.js";
+import {
+  StyledCaption,
+  StyledHeading,
+  StyledSubtitle,
+} from "@/components/Fonts.js";
 
 function BillDetails({ title, amount, children }) {
   return (
     <>
       <Container>
-        <StyledSubtitle>{title}</StyledSubtitle>
-        <List>{children}</List>
+        <StyledHeading>{title}</StyledHeading>
+        <StyledSubtitle>Total {amount} $ </StyledSubtitle>
+        <List>
+          <StyledCaption>{children}</StyledCaption>
+        </List>
       </Container>
-
-      <StyledAmount>Total {amount} $</StyledAmount>
     </>
   );
 }
@@ -28,10 +33,7 @@ const Container = styled.div`
   padding: 1rem 2rem;
   flex-direction: column;
   border-radius: 1.5625em;
+  border: 2px solid var(--txt-link);
 `;
 
-const StyledAmount = styled(StyledSubtitle)`
-  text-align: center;
-  padding-top: 5rem;
-`;
 export default BillDetails;

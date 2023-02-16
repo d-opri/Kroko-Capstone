@@ -2,8 +2,8 @@ import BillDetails from "@/components/BillDetails";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
-import { LinkButton, GhostButton } from "@/components/Button";
-import { StyledLabel } from "@/components/Fonts.js";
+import { LinkButton, GhostButton, GhostLinkButton } from "@/components/Button";
+
 import Back from "@/assets/chevron_left.svg";
 import Link from "next/link";
 
@@ -28,27 +28,32 @@ export default function BillPageDetails() {
 
   return (
     <Wrapper>
-      <StyledLink href='/'>
+      <StyledLink href='/create'>
         <Back style={{ color: "var(--clr-accent)" }} />
       </StyledLink>
       <BillDetails title={bill.title} amount={bill.amount}>
         {bill.participants.map((participant, id) => (
           <ListItem key={id}>
             {participant.name}
-            <BalanceWrapper>
-              {participant.balance}
+            <ItemWrapper>
+              {participant.balance > 0
+                ? `owes ${participant.balance} $`
+                : participant.balance < 0
+                ? `is owed ${-participant.balance} $`
+                : "has no balance"}
               <br />
-              <StyledLabel color='var(--txt-secondary)'>
-                paid {participant.paid} $
-              </StyledLabel>
-            </BalanceWrapper>
+              <BalanceWrapper>
+                paid {participant.paid ? `${participant.paid}` : `0`} $
+              </BalanceWrapper>
+            </ItemWrapper>
           </ListItem>
         ))}
       </BillDetails>
       <GhostButton type='button' onClick={deleteBill}>
         Delete Bill
       </GhostButton>
-      <LinkButton href={`/bills/${id}/edit`}>Edit Bill</LinkButton>
+      <GhostLinkButton href={`/bills/${id}/edit`}>Edit Bill</GhostLinkButton>
+      <LinkButton href={`/`}>Back to Dashboard</LinkButton>
     </Wrapper>
   );
 }
@@ -56,18 +61,27 @@ export default function BillPageDetails() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.7rem;
 `;
 
 const ListItem = styled.li`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+`;
+
+const ItemWrapper = styled.div`
+  text-align: right;
+  display: flex;
+  font-weight: 400;
+  flex-direction: column;
+  gap: 0.25rem;
 `;
 
 const BalanceWrapper = styled.div`
   text-align: right;
   display: flex;
+  font-weight: 300;
   flex-direction: column;
   gap: 0.25rem;
 `;
