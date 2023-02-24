@@ -191,7 +191,7 @@ const AddButton = styled.button`
   margin-bottom: -1.5rem;
 
   &:hover {
-    background-color: var(--clr-accent);
+    background-color: var(--clr-hover);
     border: 2px solid var(--clr-primary);
     color: var(--clr-primary);
   }
