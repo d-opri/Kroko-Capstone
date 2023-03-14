@@ -32,8 +32,8 @@ const StyledLink = styled(Link)`
   font-weight: 300;
 
   &:hover {
-    font-weight: 400;
-    color: var(--clr-hover);
+    font-weight: 500;
+    letter-spacing: 0.03rem;
   }
 `;
 

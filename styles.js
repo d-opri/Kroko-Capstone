@@ -12,7 +12,6 @@ export default createGlobalStyle`
     --clr-primary: rgba(23, 22, 27, 1);
     --clr-secondary: rgba(31, 31, 35, 1);
     --clr-accent: rgba(244, 195, 230, 1);
-    --clr-hover: rgba(233, 150, 209, 1);
     
 
     --txt-primary: rgba(244, 246, 252, 1);

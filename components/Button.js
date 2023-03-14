@@ -24,7 +24,7 @@ const StyledButton = styled.button`
   font-size: var(--fs-caption);
 
   &:hover {
-    background-color: var(--clr-hover);
+    background-color: rgba(233, 150, 209, 1);
     font-weight: 600;
   }
 `;
