@@ -24,7 +24,7 @@ const StyledLayout = styled.main`
   gap: 1rem;
 `;
 
-const StyledBanner = styled.h1`
+const StyledBanner = styled.div`
   font-weight: 500;
   background-color: var(--clr-primary);
   padding: 1rem;
