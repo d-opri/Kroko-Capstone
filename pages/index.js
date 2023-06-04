@@ -83,7 +83,7 @@ const BalanceContainer = styled.div`
 
 const StyledTitle = styled(StyledSubHeading)`
   color: var(--clr-primary);
-  font-weight: 300;
+  font-weight: 400;
 `;
 
 const StyledBalance = styled(StyledSubHeading)`
